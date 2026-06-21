@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.npm-cache/
+.chrome*/
+.edge-test*/
+*.log
+*-preview.png
+chrome-test.png
+edge-test.png
+.env
+.env.local
