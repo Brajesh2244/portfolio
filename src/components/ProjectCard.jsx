@@ -29,8 +29,8 @@ function ProjectCard({ project, delay = 0 }) {
           <Orbit size={34} />
         </div>
         <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between border border-white/10 bg-black/45 px-4 py-3 backdrop-blur-xl">
-          <span className="text-xs uppercase tracking-[0.22em] text-white/54">Model Outcome</span>
-          <strong className="font-display text-2xl text-white">{project.outcome}</strong>
+          <span className="text-xs uppercase tracking-[0.22em] text-white/54">{project.outcomeLabel || "Architecture"}</span>
+          <strong className="font-display text-xl text-white">{project.outcome}</strong>
         </div>
       </div>
       <div className="mb-5 flex items-start justify-between gap-4">

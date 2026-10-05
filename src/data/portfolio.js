@@ -1,95 +1,116 @@
 export const stats = [
-  { label: "MCA CGPA", value: "8.8", caption: "Strong academic base in software and computing" },
-  { label: "Best ML Accuracy", value: "94%", caption: "Mental health classifier model performance" },
-  { label: "Technologies Used", value: "12+", caption: "Java, React, ML, database, and developer tools" },
-  { label: "Internship Experience", value: "1", caption: "Web development internship at BrizTech Pvt Ltd" }
+  { label: "MCA CGPA", value: "9.4", caption: "2nd Rank Holder at Sir MVIT with stellar academic record" },
+  { label: "Hackathon", value: "2nd", caption: "Sir MVIT Hackathon winner among 200+ competitors" },
+  { label: "Full Stack Projects", value: "2+", caption: "End-to-end Java, React, SQL & JDBC applications" },
+  { label: "Internships", value: "2", caption: "Tap Academy (Active) & BrizTech Pvt Ltd experience" }
 ];
 
 export const skillGroups = [
   {
-    title: "Software Core",
+    title: "Backend & Core",
     signal: "Backend Logic",
-    description: "The engineering foundation for clean, object-oriented, database-aware applications.",
+    description: "Robust, object-oriented, and database-connected backend development in the Java ecosystem.",
     skills: [
-      { name: "Core Java", level: 92 },
-      { name: "OOP", level: 90 },
-      { name: "SQL", level: 84 }
+      { name: "Core Java", level: 94 },
+      { name: "Spring Boot", level: 86 },
+      { name: "Hibernate / JDBC", level: 88 },
+      { name: "OOP & Collections", level: 92 },
+      { name: "SQL / MySQL", level: 86 }
     ]
   },
   {
-    title: "Interface Layer",
+    title: "Frontend & UI",
     signal: "Product UI",
-    description: "Modern web interfaces with component thinking, responsive layouts, and fast iteration.",
+    description: "Modern, component-driven user interfaces built with responsive design and smooth UX.",
     skills: [
-      { name: "React", level: 88 },
+      { name: "React.js", level: 88 },
       { name: "JavaScript", level: 86 },
-      { name: "Tailwind CSS", level: 84 },
-      { name: "HTML", level: 92 },
-      { name: "CSS", level: 88 }
+      { name: "Tailwind CSS", level: 88 },
+      { name: "HTML5 / CSS3", level: 92 }
     ]
   },
   {
-    title: "AI Workflow",
+    title: "Engineering & AI Tools",
     signal: "Developer Velocity",
-    description: "Version control and AI-assisted development habits for faster research, coding, and review.",
+    description: "Version control, agile habits, and modern AI developer tools for faster delivery.",
     skills: [
-      { name: "Git", level: 82 },
-      { name: "GitHub", level: 84 },
-      { name: "ChatGPT", level: 86 },
-      { name: "GitHub Copilot", level: 80 }
+      { name: "Git & GitHub", level: 88 },
+      { name: "MySQL / Relational DB", level: 86 },
+      { name: "Cursor AI & ChatGPT", level: 90 },
+      { name: "Antigravity & Copilot", level: 86 }
     ]
   }
 ];
 
 export const experiences = [
   {
+    title: "Java Developer Intern",
+    organization: "Tap Academy",
+    meta: "Feb 2026 – Present",
+    summary:
+      "Developing and maintaining full-stack web applications and RESTful APIs using Core Java, Advanced Java, Spring Boot, Spring AI, JDBC, Hibernate, and MySQL.",
+    points: [
+      "Developed and maintained full-stack web applications and RESTful APIs using Spring Boot, JDBC, and Hibernate",
+      "Built responsive, interactive frontend applications using React, JavaScript, HTML, and Tailwind CSS",
+      "Integrated frontend applications seamlessly with backend Java services and MySQL databases",
+      "Applied OOP, Collections, Multithreading, Exception Handling, and Java 8 to optimize application reliability"
+    ]
+  },
+  {
     title: "Web Development Intern",
     organization: "BrizTech Pvt Ltd",
-    meta: "Internship Experience",
-    summary: "Worked in a practical web development environment, translating UI requirements into React features and improving front-end delivery quality.",
+    meta: "Nov 2024 – Jan 2025",
+    summary:
+      "Contributed to full-stack web development workflows, designing REST APIs and connecting Java backend services to responsive frontend components.",
     points: [
       "Built reusable React application interfaces for production-style workflows",
-      "Integrated REST APIs and handled asynchronous data states",
-      "Improved UI performance through cleaner component structure",
-      "Practiced agile collaboration, Git workflow, and iterative delivery"
+      "Designed and tested REST APIs utilizing Java and the Spring Framework",
+      "Troubleshot and debugged backend data routing issues to improve stability",
+      "Practiced agile collaboration, Git version control, and sprint reviews"
     ]
   }
 ];
 
 export const projects = [
   {
-    title: "Mental Health Status Classifier",
-    eyebrow: "AI Case Study 01",
-    description: "Machine learning system that classifies mental health status from survey-style input and presents explainable insights for early screening workflows.",
-    outcome: "94% accuracy",
+    title: "AI-Enhanced E-Commerce Platform",
+    eyebrow: "Full Stack Java Platform",
+    description:
+      "Full-stack e-commerce platform featuring authentication, product catalog, cart workflows, and secure order processing.",
+    outcome: "Full Stack System",
+    outcomeLabel: "Architecture",
     accent: "electric",
     overview:
-      "Designed the data pipeline around survey responses, cleaned the dataset, trained classification models, and shaped the result into a dashboard-ready prediction flow.",
+      "Engineered an end-to-end web shopping experience with clean separation between UI components and backend database logic using Java, JDBC, SQL, and React.",
     achievements: [
-      "Reached 94% model accuracy after preprocessing and model comparison",
-      "Converted raw survey attributes into structured ML-ready features",
-      "Built a visual insight layer to communicate predictions clearly"
+      "Built full-stack e-commerce workflows: authentication, product catalog, cart, and checkout",
+      "Implemented JDBC connectivity and optimized SQL queries to handle CRUD operations across core modules",
+      "Structured clean architecture separating UI components and data-handling logic for high maintainability",
+      "Managed feature branches and commit history using Git/GitHub with AI-assisted developer workflows"
     ],
-    features: ["Survey based detection", "Data preprocessing", "Classification models", "Visualization dashboard"],
-    technologies: ["Python", "Scikit-Learn", "Machine Learning", "Data Visualization"],
+    features: ["User Authentication", "Product Catalog & Cart", "Order Processing", "JDBC & SQL CRUD Operations"],
+    technologies: ["Java", "JDBC", "SQL", "React.js", "Tailwind CSS", "JavaScript", "Git"],
     liveUrl: "#contact",
     githubUrl: "https://github.com/"
   },
   {
-    title: "Heart Disease Risk Prediction",
-    eyebrow: "AI Case Study 02",
-    description: "Healthcare-focused risk prediction model using Logistic Regression to estimate heart disease probability from structured patient indicators.",
-    outcome: "91% accuracy",
+    title: "AI-Assisted Food Delivery Application",
+    eyebrow: "Full Stack Java Application",
+    description:
+      "Interactive food delivery application featuring restaurant listings, menu browsing, order placement, and status tracking.",
+    outcome: "Modular & Scalable",
+    outcomeLabel: "Architecture",
     accent: "neon",
     overview:
-      "Built a supervised ML workflow for health risk analysis with attention to interpretability, clean inputs, and responsible presentation of prediction results.",
+      "Developed a responsive food ordering system with React.js frontend navigation, backed by JDBC and SQL for restaurant, menu, and customer order management.",
     achievements: [
-      "Achieved 91% accuracy with a Logistic Regression model",
-      "Focused on understandable healthcare analytics over black-box output",
-      "Structured the model flow for secure, prediction-oriented usage"
+      "Developed a complete food delivery app with restaurant listings, menu management, and order tracking",
+      "Built responsive interfaces with React.js focused on clear navigation and intuitive usability",
+      "Integrated JDBC and SQL for efficient restaurant, menu, and customer order data management",
+      "Tested core flows early to ensure data integrity and catch functional issues ahead of release"
     ],
-    features: ["Risk prediction", "Data security", "Healthcare analytics"],
-    technologies: ["Python", "Machine Learning", "Logistic Regression", "Healthcare Analytics"],
+    features: ["Restaurant Listings", "Menu Management", "Real-Time Order Tracking", "Relational Database Design"],
+    technologies: ["Java", "JDBC", "SQL", "React.js", "Tailwind CSS", "JavaScript", "GitHub"],
     liveUrl: "#contact",
     githubUrl: "https://github.com/"
   }
@@ -97,17 +118,31 @@ export const projects = [
 
 export const education = [
   {
-    title: "MCA",
-    organization: "Sir M Visvesvaraya Institute of Technology",
-    meta: "CGPA 8.8",
-    points: ["Master of Computer Applications", "Advanced software and computing foundation"]
+    title: "Master of Computer Applications (MCA)",
+    organization: "Sir M. Visvesvaraya Institute of Technology, VTU, Bangalore",
+    meta: "Nov 2023 – Nov 2025 | CGPA 9.4",
+    summary: "Department 2nd Rank Holder with exceptional academic performance in software engineering and computer science.",
+    points: [
+      "Secured 2nd Rank in the department with an outstanding CGPA of 9.4 / 10.0",
+      "Won 2nd Place at Sir MVIT Hackathon competing against 200+ participants with optimized Java algorithms",
+      "Core coursework: Data Structures, OOP, Web Application Development, Database Systems"
+    ]
   },
   {
-    title: "BCA",
-    organization: "Jharkhand Rai University",
-    meta: "CGPA 7.9",
-    points: ["Bachelor of Computer Applications", "Programming, databases, and web fundamentals"]
+    title: "Bachelor of Computer Applications (BCA)",
+    organization: "Jharkhand Rai University, Ranchi",
+    meta: "Jun 2020 – Jul 2023 | CGPA 7.9",
+    summary: "Solid foundation in programming, database design, software engineering fundamentals, and web technologies.",
+    points: [
+      "Graduated with CGPA 7.9 / 10.0",
+      "Built strong base in Object-Oriented Programming, C/C++, Java, and Relational Databases"
+    ]
   }
 ];
 
-export const certifications = ["Web Development Certification", "Campus Hero Webinar"];
+export const certifications = [
+  "2nd Place Winner — Sir MVIT Hackathon (200+ Participants)",
+  "2nd Rank Holder — Sir MVIT MCA Program (CGPA 9.4 / 10.0)",
+  "Web Development Certification — Internshala (HTML & CSS)",
+  "Campus Hero Webinar — Coding Ninjas (Spring, REST APIs & CS Core)"
+];

@@ -38,35 +38,60 @@ gsap.registerPlugin(ScrollTrigger);
 
 const navItems = ["About", "Skills", "Experience", "Projects", "Education", "Contact"];
 
-const roles = ["Java Developer", "React Developer", "Machine Learning Enthusiast", "Future Full Stack Developer"];
+const roles = [
+  "Java Full Stack Developer",
+  "Spring Boot & React Developer",
+  "Software Engineer",
+  "Backend Java Developer"
+];
 
 const resumeText = `BRAJESH KUMAR
+Email: brajesh552077@gmail.com | Phone: +91-9117252022 | Bengaluru, India
+Profiles: LinkedIn | GitHub
 
-MCA Graduate | Java Developer | React Developer | Machine Learning Enthusiast
+PROFESSIONAL SUMMARY
+Detail-oriented Java Full Stack Developer and MCA graduate (CGPA 9.4, 2nd Rank Holder at Sir MVIT) with hands-on experience building responsive, full-stack web applications using Java, JavaScript, React.js, and SQL. Skilled in REST API integration, JDBC-based database connectivity, and end-to-end feature development across frontend and backend layers.
 
-Profile
-Motivated MCA graduate focused on Java development, React interfaces, machine learning workflows, and scalable software engineering.
+PROFESSIONAL EXPERIENCE
+1. Java Developer Intern — Tap Academy (February 2026 – Present)
+- Developed and maintained full-stack web applications and RESTful APIs using Core Java, Advanced Java, Spring Boot, Spring AI, JDBC, Hibernate, and MySQL.
+- Built responsive and interactive frontend applications using React, JavaScript, HTML, and Tailwind CSS.
+- Applied OOP, Collections, Multithreading, Exception Handling, and Java 8 features while optimizing database queries.
 
-Experience
-BrizTech Pvt Ltd - Web Development Intern
-- Built React applications
-- Integrated REST APIs
-- Improved UI performance
-- Agile development experience
+2. Software Engineering Intern — BrizTech Pvt. Ltd. (November 2024 – January 2025)
+- Designed, built, and tested REST APIs utilizing Java and the Spring Framework.
+- Linked core Java backend services to responsive React/HTML/CSS front-end UI components.
+- Collaborated in Agile sprints, daily stand-ups, and code reviews.
 
-Projects
-Mental Health Status Classifier - Machine learning model achieving 94% accuracy.
-Heart Disease Risk Prediction - Logistic Regression model with 91% accuracy.
+ACADEMIC PROJECTS
+1. AI-Enhanced E-Commerce Platform | Full Stack Java
+- Technologies: Java, JDBC, SQL, React.js, HTML5, CSS3, Tailwind CSS, JavaScript, Git, GitHub
+- Built full-stack e-commerce platform with authentication, product catalog, cart, and order processing.
+- Implemented JDBC connectivity and SQL queries to handle CRUD operations across core modules.
+- Structured code to separate UI and data-handling logic, improving maintainability.
 
-Education
-MCA - Sir M Visvesvaraya Institute of Technology - CGPA 8.8
-BCA - Jharkhand Rai University - CGPA 7.9
+2. AI-Assisted Food Delivery Application | Full Stack Java
+- Technologies: Java, JDBC, SQL, React.js, HTML5, CSS3, Tailwind CSS, JavaScript, Git, GitHub
+- Developed a food delivery app with restaurant listings, menu management, and order tracking.
+- Built responsive interfaces with React.js focused on clear navigation and usability.
+- Integrated JDBC and SQL for restaurant, menu, and order data management.
 
-Career Goals
-Software Engineer, Java Developer, Full Stack Developer
+ACHIEVEMENTS & CERTIFICATIONS
+- 2nd Place Winner, Sir MVIT Hackathon (200+ participants)
+- 2nd Rank Holder, Sir MVIT MCA Program (CGPA: 9.4 / 10.0)
+- Web Development Certification — Internshala
+- Campus Hero Webinar — Coding Ninjas
 
-Skills
-Core Java, OOP, SQL, HTML, CSS, JavaScript, React, Tailwind CSS, Git, GitHub, ChatGPT, GitHub Copilot
+EDUCATION
+- Master of Computer Applications (MCA) — Sir M. Visvesvaraya Institute of Technology, VTU, Bangalore | CGPA: 9.4 / 10.0
+- Bachelor of Computer Applications (BCA) — Jharkhand Rai University, Ranchi | CGPA: 7.9 / 10.0
+
+TECHNICAL SKILLS
+- Programming Languages: Java, SQL, JavaScript
+- Backend: Core Java, JDBC, OOP, Hibernate, Spring Boot
+- Frontend: HTML5, CSS3, React.js, Tailwind CSS
+- Databases: SQL, MySQL, Relational Database Design
+- Tools: Git, GitHub, Cursor AI, ChatGPT, Claude AI, Gemini AI, Antigravity AI
 `;
 
 function downloadResume() {
@@ -236,7 +261,7 @@ function Hero() {
           >
             <div className="eyebrow mb-5">
               <Bot size={16} />
-              AI + Software Engineering Command Center
+              Java Full Stack Developer & Software Engineer
             </div>
             <h1 className="hero-title">BRAJESH KUMAR</h1>
             <div className="mt-5 max-w-3xl">
@@ -244,11 +269,12 @@ function Hero() {
               <RoleSwitcher />
             </div>
             <p className="mt-7 max-w-2xl text-base leading-8 text-white/68 sm:text-lg">
-              I combine Core Java, OOP, React, SQL, and machine learning to build recruiter-ready software projects:
-              reliable logic, polished interfaces, and data-driven prediction systems.
+              Detail-oriented Java Full Stack Developer with hands-on experience building responsive web applications
+              using Java, Spring Boot, React, and SQL. Skilled in REST API integration, JDBC connectivity, and end-to-end
+              feature delivery.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              {["Software Engineer", "Java Developer", "Full Stack Developer"].map((goal) => (
+              {["Java Developer", "Full Stack Developer", "Spring Boot & React", "Software Engineer"].map((goal) => (
                 <span key={goal} className="mission-chip">
                   {goal}
                 </span>
@@ -275,7 +301,7 @@ function Hero() {
               <a className="icon-button" href="https://www.linkedin.com/" aria-label="LinkedIn">
                 <Linkedin size={19} />
               </a>
-              <a className="icon-button" href="mailto:brajesh@example.com" aria-label="Email">
+              <a className="icon-button" href="mailto:brajesh552077@gmail.com" aria-label="Email">
                 <Mail size={19} />
               </a>
             </div>
@@ -299,10 +325,10 @@ function Hero() {
             </div>
             <div className="space-y-4">
               {[
-                ["Core Java + OOP", "92%"],
-                ["React UI Systems", "88%"],
-                ["ML Classification", "94%"],
-                ["SQL + Data Flow", "84%"]
+                ["Core Java + OOP", "94%"],
+                ["Spring Boot & APIs", "88%"],
+                ["React UI & Tailwind", "88%"],
+                ["SQL & Relational DB", "86%"]
               ].map(([label, value]) => (
                 <div key={label}>
                   <div className="mb-2 flex justify-between text-sm text-white/72">
@@ -355,23 +381,23 @@ function About() {
   return (
     <section id="about" className="section-shell">
       <SectionHeader
-        kicker="Profile"
-        title="Java-first engineer with AI project proof"
-        summary="The brand is intentionally focused: software engineering fundamentals, React product interfaces, and machine learning projects with measurable outcomes."
-        icon={BrainCircuit}
+        kicker="Profile Overview"
+        title="Engineering Scalable Full Stack Web Applications"
+        summary="Focused on robust object-oriented Java backends, responsive React user interfaces, and clean, scalable architecture."
+        icon={Code2}
       />
       <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
         <div className="glass-panel reveal">
           <p className="text-xl leading-9 text-white/78">
-            Motivated MCA graduate with experience in software development, web technologies, machine learning, and
-            building scalable applications. I am targeting Software Engineer, Java Developer, and Full Stack Developer
-            roles where strong fundamentals and product execution matter.
+            Detail-oriented Java Full Stack Developer and MCA graduate (9.4 CGPA, 2nd Rank Holder at Sir MVIT) with
+            hands-on experience building full-stack web applications using Java, Spring Boot, React.js, and SQL.
+            Skilled in REST API integration, JDBC connectivity, and end-to-end feature delivery across frontend and backend layers.
           </p>
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            <Capability icon={Code2} title="Java Development" text="Core Java, OOP, and structured problem solving." />
-            <Capability icon={TerminalSquare} title="React Development" text="Component-driven interfaces with responsive Tailwind styling." />
-            <Capability icon={BrainCircuit} title="Machine Learning" text="Classification models, preprocessing, accuracy tracking, and insights." />
-            <Capability icon={ServerCog} title="Engineering Workflow" text="Git, GitHub, API integration, agile habits, and AI-assisted development." />
+            <Capability icon={Code2} title="Java & Spring Boot" text="Core Java, OOP, Spring Boot, Hibernate, JDBC, and RESTful APIs." />
+            <Capability icon={TerminalSquare} title="React & Frontend" text="Component-driven interfaces with responsive Tailwind CSS styling." />
+            <Capability icon={Database} title="Database & SQL" text="Relational database design, JDBC connectivity, and query optimization." />
+            <Capability icon={ServerCog} title="Engineering Workflow" text="Git, GitHub, SDLC, agile team habits, and AI-assisted developer velocity." />
           </div>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -399,8 +425,8 @@ function Skills() {
     <section id="skills" className="section-shell">
       <SectionHeader
         kicker="Technology Dashboard"
-        title="A stack built for Java, React, and AI delivery"
-        summary="Instead of a flat skill list, this dashboard groups the tools by how a recruiter would evaluate them: software core, interface layer, and modern AI-assisted workflow."
+        title="A modern stack for Full Stack Java & Web delivery"
+        summary="Organized across backend logic, responsive interface design, and modern developer tooling for maximum development velocity."
         icon={Sparkles}
       />
       <div className="grid gap-5 lg:grid-cols-3">
@@ -416,9 +442,9 @@ function Experience() {
   return (
     <section id="experience" className="section-shell">
       <SectionHeader
-        kicker="Internship Timeline"
-        title="BrizTech experience, presented by impact"
-        summary="The internship section now emphasizes workplace execution: React features, REST API integration, UI performance, Git workflow, and agile collaboration."
+        kicker="Internship Experience"
+        title="Industry-tested software development & API integration"
+        summary="Practical workplace experience at Tap Academy and BrizTech developing full-stack features, building REST APIs, and connecting databases with React."
         icon={BriefcaseBusiness}
       />
       <div className="timeline">
@@ -434,26 +460,26 @@ function Projects() {
   return (
     <section id="projects" className="section-shell projects-feature">
       <SectionHeader
-        kicker="Project Command Deck"
-        title="Machine learning case studies recruiters can scan"
-        summary="Projects are the highlight: each one now shows the problem, model outcome, technology stack, key achievements, and practical feature modules."
+        kicker="Project Showcase"
+        title="Full Stack Java & modern web applications"
+        summary="End-to-end applications demonstrating complete full-stack architecture, clean separation of concerns, and robust database operations."
         icon={Database}
       />
       <div className="reveal mb-6 grid gap-4 md:grid-cols-3">
         <div className="mission-card">
-          <Activity size={22} />
-          <span>Best Accuracy</span>
-          <strong>94%</strong>
-        </div>
-        <div className="mission-card">
-          <BrainCircuit size={22} />
-          <span>ML Focus</span>
-          <strong>Classification</strong>
-        </div>
-        <div className="mission-card">
           <Code2 size={22} />
-          <span>Presentation</span>
-          <strong>Dashboard-ready</strong>
+          <span>Core Stack</span>
+          <strong>Full Stack Java</strong>
+        </div>
+        <div className="mission-card">
+          <TerminalSquare size={22} />
+          <span>Frontend Layer</span>
+          <strong>React & Tailwind</strong>
+        </div>
+        <div className="mission-card">
+          <Database size={22} />
+          <span>Data Layer</span>
+          <strong>JDBC & SQL</strong>
         </div>
       </div>
       <div className="grid gap-6 lg:grid-cols-2">
@@ -470,8 +496,8 @@ function Education() {
     <section id="education" className="section-shell">
       <SectionHeader
         kicker="Education"
-        title="Academic foundation for software engineering"
-        summary="MCA and BCA credentials anchor the portfolio with strong computing fundamentals and steady academic performance."
+        title="Academic excellence & computing foundation"
+        summary="MCA degree with a 9.4 CGPA (2nd Rank Holder at Sir MVIT) and BCA degree establishing deep computer science and programming fundamentals."
         icon={GraduationCap}
       />
       <div className="timeline">
@@ -486,7 +512,12 @@ function Education() {
 function Certifications() {
   return (
     <section className="section-shell">
-      <SectionHeader kicker="Certifications" title="Signals Of Continued Learning" icon={Sparkles} />
+      <SectionHeader
+        kicker="Honors & Credentials"
+        title="Hackathon Awards & Verified Certifications"
+        summary="Competitive programming recognition, academic rank honours, and technical certifications."
+        icon={Sparkles}
+      />
       <div className="grid gap-5 md:grid-cols-2">
         {certifications.map((certificate, index) => (
           <motion.div
@@ -502,8 +533,8 @@ function Certifications() {
                 <ShieldCheck />
               </span>
               <div>
-                <h3 className="font-display text-xl font-semibold">{certificate}</h3>
-                <p className="mt-2 text-sm leading-6 text-white/60">Verified learning milestone in the engineering orbit.</p>
+                <h3 className="font-display text-lg font-semibold">{certificate}</h3>
+                <p className="mt-2 text-sm leading-6 text-white/60">Verified credential and milestone in technical excellence.</p>
               </div>
             </div>
           </motion.div>
@@ -516,17 +547,17 @@ function Certifications() {
 function Contact() {
   return (
     <section id="contact" className="section-shell pb-20">
-      <SectionHeader kicker="Contact" title="Open A Secure Channel" icon={Mail} />
+      <SectionHeader kicker="Contact" title="Get In Touch" icon={Mail} />
       <div className="grid gap-6 lg:grid-cols-[0.86fr_1.14fr]">
         <div className="glass-panel reveal">
           <p className="text-lg leading-8 text-white/72">
-            Have a role, project, or AI-powered product idea? Send a message and the form will forward it to the
-            configured backend API.
+            Interested in discussing full-stack Java roles, React web projects, or engineering opportunities? Feel free
+            to connect directly.
           </p>
           <div className="mt-8 space-y-4 text-sm text-white/70">
-            <a className="contact-link" href="mailto:brajesh@example.com">
+            <a className="contact-link" href="mailto:brajesh552077@gmail.com">
               <Mail size={18} />
-              brajesh@example.com
+              brajesh552077@gmail.com
             </a>
             <a className="contact-link" href="https://github.com/">
               <Github size={18} />
@@ -556,7 +587,7 @@ function Footer() {
           <a className="icon-button" href="https://www.linkedin.com/" aria-label="LinkedIn">
             <Linkedin size={18} />
           </a>
-          <a className="icon-button" href="mailto:brajesh@example.com" aria-label="Email">
+          <a className="icon-button" href="mailto:brajesh552077@gmail.com" aria-label="Email">
             <Mail size={18} />
           </a>
         </div>
