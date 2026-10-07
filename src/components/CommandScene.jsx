@@ -1,50 +1,413 @@
-import { Canvas, useFrame } from "@react-three/fiber";
-import { useMemo, useRef } from "react";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { Activity, Compass, Eye, Play, Radar, RotateCcw, ShieldCheck, Zap } from "lucide-react";
 
+/**
+ * High-performance 3D Drone Scene
+ * Featuring the Aevion Autonomous LiDAR Drone model from drone.riotters.com
+ */
 function CommandScene() {
+  const [lidarActive, setLidarActive] = useState(true);
+  const [autoRotate, setAutoRotate] = useState(false);
+  const [propSpeed, setPropSpeed] = useState(1);
+  const [cameraView, setCameraView] = useState("hero"); // 'hero' | 'inspect' | 'top'
+  const dragRef = useRef({ isDragging: false, prevX: 0, prevY: 0, rotX: 0, rotY: 0 });
+
+  const handlePointerDown = (e) => {
+    dragRef.current.isDragging = true;
+    dragRef.current.prevX = e.clientX;
+    dragRef.current.prevY = e.clientY;
+  };
+
+  const handlePointerMove = (e) => {
+    if (!dragRef.current.isDragging) return;
+    const dx = e.clientX - dragRef.current.prevX;
+    const dy = e.clientY - dragRef.current.prevY;
+    dragRef.current.prevX = e.clientX;
+    dragRef.current.prevY = e.clientY;
+    dragRef.current.rotY += dx * 0.008;
+    dragRef.current.rotX += dy * 0.008;
+    dragRef.current.rotX = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, dragRef.current.rotX));
+  };
+
+  const handlePointerUp = () => {
+    dragRef.current.isDragging = false;
+  };
+
+  const resetView = () => {
+    dragRef.current.rotX = 0;
+    dragRef.current.rotY = 0;
+    setAutoRotate(false);
+    setCameraView("hero");
+  };
+
   return (
-    <Canvas
-      camera={{ position: [0, 1.6, 8.2], fov: 55 }}
-      dpr={[1, 1.8]}
-      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+    <div
+      className="relative h-full w-full cursor-grab active:cursor-grabbing select-none"
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerLeave={handlePointerUp}
     >
-      <color attach="background" args={["#050505"]} />
-      <fog attach="fog" args={["#050505", 8, 18]} />
-      <ambientLight intensity={0.55} />
-      <pointLight position={[4, 4, 4]} color="#00D4FF" intensity={3.3} />
-      <pointLight position={[-4, 2, 3]} color="#7C3AED" intensity={2.5} />
-      <SceneRig>
+      <Canvas
+        camera={{ position: [0.8, 1.2, 5.8], fov: 42 }}
+        dpr={[1, 1.8]}
+        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+      >
+        <color attach="background" args={["#050505"]} />
+        <fog attach="fog" args={["#050505", 7, 20]} />
+        <ambientLight intensity={0.8} />
+        <directionalLight position={[6, 8, 5]} intensity={2.2} color="#ffffff" />
+        <pointLight position={[-4, 3, 2]} color="#00D4FF" intensity={3.0} />
+        <pointLight position={[4, -2, 3]} color="#7C3AED" intensity={2.0} />
+        <pointLight position={[0, -2, 0]} color="#00FFC2" intensity={lidarActive ? 2.5 : 0.5} />
+
+        <Suspense fallback={null}>
+          <DroneRig
+            lidarActive={lidarActive}
+            autoRotate={autoRotate}
+            propSpeed={propSpeed}
+            dragRef={dragRef}
+            cameraView={cameraView}
+          />
+        </Suspense>
+
         <ParticleField />
-        <CommandCore />
-        <CodePanels />
-        <DataGrid />
-      </SceneRig>
-    </Canvas>
+        <LidarGround lidarActive={lidarActive} />
+      </Canvas>
+
+      {/* Futuristic Drone Telemetry HUD Overlay */}
+      <div className="pointer-events-none absolute bottom-6 right-4 z-20 flex flex-col items-end gap-3 sm:right-8">
+        <div className="flex items-center gap-2 rounded-full border border-electric/40 bg-black/60 px-3.5 py-1.5 backdrop-blur-md text-xs font-mono tracking-wider text-electric shadow-glow">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-electric opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-electric" />
+          </span>
+          <span>AEVION LIDAR DRONE // SYS ONLINE</span>
+        </div>
+
+        {/* Quick controls */}
+        <div className="pointer-events-auto flex items-center gap-2 rounded-lg border border-white/10 bg-black/70 p-1.5 backdrop-blur-xl">
+          <button
+            type="button"
+            onClick={() => setLidarActive(!lidarActive)}
+            className={`flex items-center gap-1.5 rounded px-2.5 py-1 text-xs font-mono transition ${
+              lidarActive ? "bg-electric/20 text-electric border border-electric/40" : "text-white/60 hover:text-white"
+            }`}
+            title="Toggle LiDAR scanning laser"
+          >
+            <Radar size={13} className={lidarActive ? "animate-spin" : ""} />
+            LiDAR {lidarActive ? "ON" : "OFF"}
+          </button>
+          <button
+            type="button"
+            onClick={() => setAutoRotate(!autoRotate)}
+            className={`flex items-center gap-1.5 rounded px-2.5 py-1 text-xs font-mono transition ${
+              autoRotate ? "bg-mint/20 text-mint border border-mint/40" : "text-white/60 hover:text-white"
+            }`}
+            title="Toggle 360 inspection rotation"
+          >
+            <RotateCcw size={13} />
+            360° {autoRotate ? "ON" : "OFF"}
+          </button>
+          <button
+            type="button"
+            onClick={resetView}
+            className="flex items-center gap-1.5 rounded px-2 py-1 text-xs font-mono text-white/50 hover:text-white transition"
+            title="Reset drone orientation"
+          >
+            Reset
+          </button>
+        </div>
+
+        <div className="hidden lg:flex items-center gap-4 text-[11px] font-mono text-white/45 tracking-wider bg-black/40 px-3 py-1 border border-white/5 rounded">
+          <span>ALT: 120M</span>
+          <span>•</span>
+          <span>SPEED: 4,520 RPM</span>
+          <span>•</span>
+          <span>ACC: ±2CM</span>
+          <span>•</span>
+          <span className="text-electric">DRAG TO ROTATE 3D</span>
+        </div>
+      </div>
+    </div>
   );
 }
 
-function SceneRig({ children }) {
-  const group = useRef();
+/**
+ * Main Drone 3D Assembly & Flight Rig
+ */
+function DroneRig({ lidarActive, autoRotate, propSpeed, dragRef, cameraView }) {
+  const groupRef = useRef();
+  const droneInnerRef = useRef();
+  const motorsRef = useRef([]);
+  const [modelLoaded, setModelLoaded] = useState(false);
+  const { scene: threeScene } = useThree();
 
-  useFrame(({ mouse, clock }) => {
-    if (!group.current) return;
-    group.current.rotation.y = THREE.MathUtils.lerp(group.current.rotation.y, mouse.x * 0.13, 0.04);
-    group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, -mouse.y * 0.09, 0.04);
-    group.current.position.y = Math.sin(clock.elapsedTime * 0.45) * 0.08;
+  // Load environment map texture for photorealistic reflections
+  useEffect(() => {
+    const texLoader = new THREE.TextureLoader();
+    texLoader.load(
+      "/drone/drone-env.jpg",
+      (texture) => {
+        texture.mapping = THREE.EquirectangularReflectionMapping;
+        threeScene.environment = texture;
+      },
+      undefined,
+      (err) => {
+        console.warn("Env map load notice:", err);
+      }
+    );
+  }, [threeScene]);
+
+  // Load GLB Drone Model
+  useEffect(() => {
+    let isCancelled = false;
+    const loader = new GLTFLoader();
+
+    loader.load(
+      "/drone/drone.glb",
+      (gltf) => {
+        if (isCancelled || !droneInnerRef.current) return;
+
+        const root = gltf.scene;
+
+        // Auto center the geometry
+        const box = new THREE.Box3().setFromObject(root);
+        const center = box.getCenter(new THREE.Vector3());
+        root.position.sub(center);
+
+        // Scale model to balanced stage size
+        root.scale.setScalar(0.082);
+
+        // Find propeller / motor nodes for spinning
+        const motorNodes = [];
+        root.traverse((child) => {
+          if (child.isMesh) {
+            child.castShadow = true;
+            child.receiveShadow = true;
+            if (child.material) {
+              child.material.envMapIntensity = 1.35;
+              child.material.needsUpdate = true;
+            }
+          }
+
+          // Register propeller assemblies
+          const name = child.name || "";
+          if (
+            name.includes("FL_Motor_1") ||
+            name.includes("FR_Motor_1") ||
+            name.includes("RL_Motor") ||
+            name.includes("RR_Motor_1") ||
+            name.includes("FL_Propeller") ||
+            name.includes("FR_Propeller") ||
+            name.includes("RL_Propeller") ||
+            name.includes("RR_Propeller")
+          ) {
+            const isCCW = name.includes("FL") || name.includes("RR");
+            motorNodes.push({ object: child, isCCW, name });
+          }
+        });
+
+        motorsRef.current = motorNodes;
+
+        // Clear previous and append root
+        while (droneInnerRef.current.children.length > 0) {
+          droneInnerRef.current.remove(droneInnerRef.current.children[0]);
+        }
+        droneInnerRef.current.add(root);
+        setModelLoaded(true);
+      },
+      undefined,
+      (error) => {
+        console.error("Failed to load drone model:", error);
+      }
+    );
+
+    return () => {
+      isCancelled = true;
+    };
+  }, []);
+
+  // Frame physics loop: propeller spins, hover turbulence, mouse banking & user dragging
+  useFrame(({ clock, mouse }, delta) => {
+    const time = clock.elapsedTime;
+
+    // Spin propellers at high angular velocity (75 rad/s)
+    if (motorsRef.current.length > 0) {
+      const speed = 75.4 * propSpeed;
+      motorsRef.current.forEach((motor) => {
+        if (motor.object) {
+          const dir = motor.isCCW ? 1 : -1;
+          motor.object.rotation.y += dir * speed * delta;
+        }
+      });
+    }
+
+    if (!groupRef.current) return;
+
+    // Flight attitude physics: Hovering bob + natural turbulence
+    const hoverY = Math.sin(time * 1.5) * 0.08 + Math.cos(time * 2.8) * 0.02;
+    const hoverRoll = Math.sin(time * 1.1) * 0.02;
+    const hoverPitch = Math.cos(time * 0.9) * 0.025;
+
+    // Mouse follow banking angles
+    const mouseRoll = -mouse.x * 0.12;
+    const mousePitch = -mouse.y * 0.09;
+    const mouseYaw = mouse.x * 0.18;
+
+    // User manual drag rotation
+    if (autoRotate) {
+      dragRef.current.rotY += delta * 0.45;
+    }
+
+    const currentDrag = dragRef.current;
+
+    // Base position (slightly shifted right on desktop to align with hero card composition)
+    const targetX = 0.85 + mouse.x * 0.15;
+    const targetY = 0.2 + hoverY - mouse.y * 0.1;
+    const targetZ = 0;
+
+    groupRef.current.position.x = THREE.MathUtils.lerp(groupRef.current.position.x, targetX, 0.04);
+    groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, targetY, 0.04);
+    groupRef.current.position.z = THREE.MathUtils.lerp(groupRef.current.position.z, targetZ, 0.04);
+
+    // Apply combined rotations
+    const targetRotX = mousePitch + hoverPitch + currentDrag.rotX;
+    const targetRotY = mouseYaw + currentDrag.rotY;
+    const targetRotZ = mouseRoll + hoverRoll;
+
+    groupRef.current.rotation.x = THREE.MathUtils.lerp(groupRef.current.rotation.x, targetRotX, 0.06);
+    groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, targetRotY, 0.06);
+    groupRef.current.rotation.z = THREE.MathUtils.lerp(groupRef.current.rotation.z, targetRotZ, 0.06);
   });
 
-  return <group ref={group}>{children}</group>;
+  return (
+    <group ref={groupRef} position={[0.85, 0.2, 0]}>
+      {/* 3D Drone Model container */}
+      <group ref={droneInnerRef} />
+
+      {/* Fallback procedural drone core while GLB is streaming */}
+      {!modelLoaded && <FallbackCore />}
+
+      {/* LiDAR Laser Projector Cone & Scan Beams */}
+      {lidarActive && <LidarProjector />}
+    </group>
+  );
 }
 
+/**
+ * Animated LiDAR Scanner Beam projecting downward
+ */
+function LidarProjector() {
+  const coneRef = useRef();
+  const ringRef = useRef();
+
+  useFrame(({ clock }) => {
+    const t = clock.elapsedTime;
+    if (coneRef.current) {
+      coneRef.current.rotation.y = t * 2.5;
+      coneRef.current.material.opacity = 0.16 + Math.sin(t * 8) * 0.05;
+    }
+    if (ringRef.current) {
+      ringRef.current.rotation.z = -t * 1.5;
+      const scale = 1 + (t % 1.2) * 0.8;
+      ringRef.current.scale.set(scale, scale, 1);
+      ringRef.current.material.opacity = Math.max(0, 1 - (t % 1.2) / 1.2);
+    }
+  });
+
+  return (
+    <group position={[0, -0.35, 0]}>
+      {/* Laser cone */}
+      <mesh ref={coneRef} position={[0, -1.3, 0]}>
+        <coneGeometry args={[1.65, 2.6, 32, 1, true]} />
+        <meshStandardMaterial
+          color="#00D4FF"
+          emissive="#00D4FF"
+          emissiveIntensity={1.8}
+          transparent
+          opacity={0.16}
+          side={THREE.DoubleSide}
+          wireframe
+        />
+      </mesh>
+
+      {/* Pulsing focal laser ring */}
+      <mesh ref={ringRef} position={[0, -2.55, 0]} rotation={[Math.PI / 2, 0, 0]}>
+        <ringGeometry args={[0.3, 0.35, 32]} />
+        <meshBasicMaterial color="#00FFC2" transparent opacity={0.8} side={THREE.DoubleSide} />
+      </mesh>
+
+      {/* Central scanning pinpoint */}
+      <pointLight position={[0, -0.2, 0]} color="#00D4FF" intensity={2.5} distance={4} />
+    </group>
+  );
+}
+
+/**
+ * Holographic Ground Grid & Radar Ring System
+ */
+function LidarGround({ lidarActive }) {
+  const radarSweepRef = useRef();
+
+  useFrame(({ clock }) => {
+    if (radarSweepRef.current) {
+      radarSweepRef.current.rotation.z = clock.elapsedTime * 1.8;
+    }
+  });
+
+  return (
+    <group position={[0.85, -2.4, 0]}>
+      {/* Ground radar grid */}
+      <gridHelper args={[16, 24, "#00D4FF", "#112635"]} />
+
+      {/* Concentric scan circles */}
+      {[1.2, 2.4, 3.8, 5.2].map((radius, i) => (
+        <mesh key={radius} rotation={[Math.PI / 2, 0, 0]}>
+          <ringGeometry args={[radius, radius + 0.02, 64]} />
+          <meshBasicMaterial
+            color={i % 2 === 0 ? "#00D4FF" : "#00FFC2"}
+            transparent
+            opacity={lidarActive ? 0.35 - i * 0.06 : 0.08}
+            side={THREE.DoubleSide}
+          />
+        </mesh>
+      ))}
+
+      {/* Radar sweep line */}
+      {lidarActive && (
+        <group ref={radarSweepRef} rotation={[Math.PI / 2, 0, 0]}>
+          <lineSegments>
+            <bufferGeometry>
+              <bufferAttribute
+                attach="attributes-position"
+                count={2}
+                array={new Float32Array([0, 0, 0, 5.2, 0, 0])}
+                itemSize={3}
+              />
+            </bufferGeometry>
+            <lineBasicMaterial color="#00FFC2" transparent opacity={0.7} />
+          </lineSegments>
+        </group>
+      )}
+    </group>
+  );
+}
+
+/**
+ * Ambient background star / particle field
+ */
 function ParticleField() {
   const pointsRef = useRef();
   const particles = useMemo(() => {
-    const count = 1300;
+    const count = 900;
     const positions = new Float32Array(count * 3);
     for (let i = 0; i < count; i += 1) {
       positions[i * 3] = (Math.random() - 0.5) * 16;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 9;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
       positions[i * 3 + 2] = (Math.random() - 0.5) * 12;
     }
     return positions;
@@ -52,8 +415,7 @@ function ParticleField() {
 
   useFrame(({ clock }) => {
     if (!pointsRef.current) return;
-    pointsRef.current.rotation.y = clock.elapsedTime * 0.018;
-    pointsRef.current.rotation.x = Math.sin(clock.elapsedTime * 0.22) * 0.025;
+    pointsRef.current.rotation.y = clock.elapsedTime * 0.015;
   });
 
   return (
@@ -61,128 +423,20 @@ function ParticleField() {
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" count={particles.length / 3} array={particles} itemSize={3} />
       </bufferGeometry>
-      <pointsMaterial transparent color="#00D4FF" size={0.027} sizeAttenuation depthWrite={false} opacity={0.55} />
+      <pointsMaterial transparent color="#00D4FF" size={0.024} sizeAttenuation depthWrite={false} opacity={0.45} />
     </points>
   );
 }
 
-function CommandCore() {
-  const groupRef = useRef();
-  const ringRef = useRef();
-  const floatOrigin = useRef(0.2);
-
-  useFrame(({ clock, mouse }) => {
-    if (!groupRef.current || !ringRef.current) return;
-    groupRef.current.rotation.y = clock.elapsedTime * 0.22 + mouse.x * 0.22;
-    groupRef.current.position.y = floatOrigin.current + Math.sin(clock.elapsedTime * 1.1) * 0.12;
-    ringRef.current.rotation.z = -clock.elapsedTime * 0.42;
-  });
-
+/**
+ * Temporary sleek placeholder while GLB streams in
+ */
+function FallbackCore() {
   return (
-    <group ref={groupRef} position={[0, 0.2, 0]}>
-      <mesh>
-        <icosahedronGeometry args={[1.08, 3]} />
-        <meshStandardMaterial color="#050505" emissive="#00D4FF" emissiveIntensity={0.28} metalness={0.65} roughness={0.18} wireframe />
-      </mesh>
-      <mesh ref={ringRef} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[1.72, 0.012, 16, 160]} />
-        <meshStandardMaterial color="#00D4FF" emissive="#00D4FF" emissiveIntensity={1.4} />
-      </mesh>
-      <mesh rotation={[0, Math.PI / 2.6, Math.PI / 2]}>
-        <torusGeometry args={[2.16, 0.008, 16, 160]} />
-        <meshStandardMaterial color="#7C3AED" emissive="#7C3AED" emissiveIntensity={1.1} />
-      </mesh>
-      <StatusBars />
-    </group>
-  );
-}
-
-function StatusBars() {
-  return (
-    <group position={[-0.78, -1.9, 0.2]}>
-      {[0.88, 0.54, 1.18, 0.72].map((width, index) => (
-        <mesh key={width} position={[0, -index * 0.14, 0]}>
-          <boxGeometry args={[width, 0.035, 0.018]} />
-          <meshStandardMaterial color={index % 2 === 0 ? "#00D4FF" : "#7CFFCB"} emissive={index % 2 === 0 ? "#00D4FF" : "#7CFFCB"} emissiveIntensity={1.2} />
-        </mesh>
-      ))}
-    </group>
-  );
-}
-
-function CodePanels() {
-  const groupRef = useRef();
-
-  useFrame(({ clock }) => {
-    if (!groupRef.current) return;
-    groupRef.current.children.forEach((panel, index) => {
-      panel.position.y += Math.sin(clock.elapsedTime + index) * 0.0008;
-    });
-  });
-
-  return (
-    <group ref={groupRef}>
-      <HoloPanel position={[-3.25, 1.2, -0.8]} rotation={[0, 0.34, 0]} variant={0} />
-      <HoloPanel position={[3.15, 0.9, -1.2]} rotation={[0, -0.36, 0]} variant={1} />
-      <HoloPanel position={[2.25, -1.45, 0.15]} rotation={[0, -0.2, 0]} variant={2} />
-    </group>
-  );
-}
-
-function HoloPanel({ position, rotation, variant }) {
-  const lineWidths = [
-    [1.42, 0.92, 1.76, 1.12],
-    [1.28, 1.7, 0.84, 1.46],
-    [1.58, 1.02, 1.3, 0.78]
-  ][variant];
-
-  return (
-    <group position={position} rotation={rotation}>
-      <mesh>
-        <boxGeometry args={[2.35, 1.28, 0.035]} />
-        <meshStandardMaterial color="#071017" transparent opacity={0.38} emissive="#00D4FF" emissiveIntensity={0.12} />
-      </mesh>
-      <lineSegments>
-        <edgesGeometry args={[new THREE.BoxGeometry(2.38, 1.31, 0.04)]} />
-        <lineBasicMaterial color="#00D4FF" transparent opacity={0.68} />
-      </lineSegments>
-      {lineWidths.map((width, index) => (
-        <group key={`${width}-${index}`} position={[-0.92, 0.42 - index * 0.28, 0.05]}>
-          <mesh position={[width / 2, 0, 0]}>
-            <boxGeometry args={[width, 0.035, 0.018]} />
-            <meshStandardMaterial
-              color={index === 1 ? "#7CFFCB" : "#ffffff"}
-              emissive={index === 1 ? "#7CFFCB" : "#00D4FF"}
-              emissiveIntensity={index === 1 ? 1 : 0.42}
-            />
-          </mesh>
-          <mesh position={[-0.08, 0, 0]}>
-            <sphereGeometry args={[0.035, 12, 12]} />
-            <meshStandardMaterial color="#7C3AED" emissive="#7C3AED" emissiveIntensity={1.1} />
-          </mesh>
-        </group>
-      ))}
-    </group>
-  );
-}
-
-function DataGrid() {
-  const positions = useMemo(() => {
-    const grid = [];
-    for (let i = -8; i <= 8; i += 1) {
-      grid.push(i, -2.85, -5.6, i, -2.85, 5.6);
-      grid.push(-8, -2.85, i * 0.7, 8, -2.85, i * 0.7);
-    }
-    return new Float32Array(grid);
-  }, []);
-
-  return (
-    <lineSegments>
-      <bufferGeometry>
-        <bufferAttribute attach="attributes-position" count={positions.length / 3} array={positions} itemSize={3} />
-      </bufferGeometry>
-      <lineBasicMaterial color="#133D52" transparent opacity={0.5} />
-    </lineSegments>
+    <mesh>
+      <octahedronGeometry args={[0.7, 2]} />
+      <meshStandardMaterial color="#050505" emissive="#00D4FF" emissiveIntensity={0.8} wireframe />
+    </mesh>
   );
 }
 
