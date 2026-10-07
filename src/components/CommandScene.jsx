@@ -149,82 +149,95 @@ function DroneRig({ lidarActive, autoRotate, propSpeed, dragRef, cameraView }) {
   // Load environment map texture for photorealistic reflections
   useEffect(() => {
     const texLoader = new THREE.TextureLoader();
-    texLoader.load(
-      "/drone/drone-env.jpg",
-      (texture) => {
-        texture.mapping = THREE.EquirectangularReflectionMapping;
-        threeScene.environment = texture;
-      },
-      undefined,
-      (err) => {
-        console.warn("Env map load notice:", err);
-      }
-    );
+    const loadEnv = (url) => {
+      texLoader.load(
+        url,
+        (texture) => {
+          texture.mapping = THREE.EquirectangularReflectionMapping;
+          threeScene.environment = texture;
+        },
+        undefined,
+        () => {
+          if (url === "/drone/drone-env.jpg") {
+            loadEnv("https://drone.riotters.com/drone/drone-env.jpg");
+          }
+        }
+      );
+    };
+    loadEnv("/drone/drone-env.jpg");
   }, [threeScene]);
 
-  // Load GLB Drone Model
+  // Load GLB Drone Model with fallback
   useEffect(() => {
     let isCancelled = false;
     const loader = new GLTFLoader();
 
-    loader.load(
-      "/drone/drone.glb",
-      (gltf) => {
-        if (isCancelled || !droneInnerRef.current) return;
+    const applyModel = (gltf) => {
+      if (isCancelled || !droneInnerRef.current) return;
+      const root = gltf.scene;
 
-        const root = gltf.scene;
+      // Auto center the geometry
+      const box = new THREE.Box3().setFromObject(root);
+      const center = box.getCenter(new THREE.Vector3());
+      root.position.sub(center);
 
-        // Auto center the geometry
-        const box = new THREE.Box3().setFromObject(root);
-        const center = box.getCenter(new THREE.Vector3());
-        root.position.sub(center);
+      // Scale model to balanced stage size
+      root.scale.setScalar(0.082);
 
-        // Scale model to balanced stage size
-        root.scale.setScalar(0.082);
-
-        // Find propeller / motor nodes for spinning
-        const motorNodes = [];
-        root.traverse((child) => {
-          if (child.isMesh) {
-            child.castShadow = true;
-            child.receiveShadow = true;
-            if (child.material) {
-              child.material.envMapIntensity = 1.35;
-              child.material.needsUpdate = true;
-            }
+      // Find propeller / motor nodes for spinning
+      const motorNodes = [];
+      root.traverse((child) => {
+        if (child.isMesh) {
+          child.castShadow = true;
+          child.receiveShadow = true;
+          if (child.material) {
+            child.material.envMapIntensity = 1.35;
+            child.material.needsUpdate = true;
           }
-
-          // Register propeller assemblies
-          const name = child.name || "";
-          if (
-            name.includes("FL_Motor_1") ||
-            name.includes("FR_Motor_1") ||
-            name.includes("RL_Motor") ||
-            name.includes("RR_Motor_1") ||
-            name.includes("FL_Propeller") ||
-            name.includes("FR_Propeller") ||
-            name.includes("RL_Propeller") ||
-            name.includes("RR_Propeller")
-          ) {
-            const isCCW = name.includes("FL") || name.includes("RR");
-            motorNodes.push({ object: child, isCCW, name });
-          }
-        });
-
-        motorsRef.current = motorNodes;
-
-        // Clear previous and append root
-        while (droneInnerRef.current.children.length > 0) {
-          droneInnerRef.current.remove(droneInnerRef.current.children[0]);
         }
-        droneInnerRef.current.add(root);
-        setModelLoaded(true);
-      },
-      undefined,
-      (error) => {
-        console.error("Failed to load drone model:", error);
+
+        // Register propeller assemblies
+        const name = child.name || "";
+        if (
+          name.includes("FL_Motor_1") ||
+          name.includes("FR_Motor_1") ||
+          name.includes("RL_Motor") ||
+          name.includes("RR_Motor_1") ||
+          name.includes("FL_Propeller") ||
+          name.includes("FR_Propeller") ||
+          name.includes("RL_Propeller") ||
+          name.includes("RR_Propeller")
+        ) {
+          const isCCW = name.includes("FL") || name.includes("RR");
+          motorNodes.push({ object: child, isCCW, name });
+        }
+      });
+
+      motorsRef.current = motorNodes;
+
+      // Clear previous and append root
+      while (droneInnerRef.current.children.length > 0) {
+        droneInnerRef.current.remove(droneInnerRef.current.children[0]);
       }
-    );
+      droneInnerRef.current.add(root);
+      setModelLoaded(true);
+    };
+
+    const loadModel = (url) => {
+      loader.load(
+        url,
+        applyModel,
+        undefined,
+        (error) => {
+          console.warn("Local drone load notice, falling back to remote:", error);
+          if (url === "/drone/drone.glb") {
+            loadModel("https://drone.riotters.com/drone/drone.glb");
+          }
+        }
+      );
+    };
+
+    loadModel("/drone/drone.glb");
 
     return () => {
       isCancelled = true;
