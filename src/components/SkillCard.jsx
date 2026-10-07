@@ -11,14 +11,14 @@ function SkillCard({ group, delay = 0 }) {
       transition={{ delay, duration: 0.64 }}
       whileHover={{ y: -10, rotateX: 5, rotateY: 3 }}
     >
-      <div className="mb-6 flex items-start justify-between gap-4">
+      <div className="mb-5 flex items-start justify-between gap-4">
         <div>
-          <p className="text-xs uppercase tracking-[0.32em] text-electric">{group.signal}</p>
-          <h3 className="mt-2 font-display text-2xl font-semibold">{group.title}</h3>
-          <p className="mt-3 text-sm leading-6 text-white/58">{group.description}</p>
+          <p className="text-xs uppercase tracking-[0.24em] text-electric">{group.signal}</p>
+          <h3 className="mt-1.5 font-display text-lg sm:text-xl font-semibold">{group.title}</h3>
+          <p className="mt-2 text-xs sm:text-sm leading-5 sm:leading-6 text-white/60">{group.description}</p>
         </div>
-        <span className="grid h-12 w-12 place-items-center border border-white/10 bg-white/[0.06] text-electric transition group-hover:border-electric group-hover:shadow-glow">
-          <Cpu size={23} />
+        <span className="grid h-10 w-10 place-items-center border border-white/10 bg-white/[0.06] text-electric transition group-hover:border-electric group-hover:shadow-glow">
+          <Cpu size={20} />
         </span>
       </div>
       <div className="space-y-4">

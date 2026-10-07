@@ -33,20 +33,20 @@ function ProjectCard({ project, delay = 0 }) {
           <strong className="font-display text-xl text-white">{project.outcome}</strong>
         </div>
       </div>
-      <div className="mb-5 flex items-start justify-between gap-4">
+      <div className="mb-4 flex items-start justify-between gap-4">
         <div>
-          <p className="text-xs uppercase tracking-[0.32em] text-white/42">{project.eyebrow}</p>
-          <h3 className="mt-2 font-display text-2xl font-semibold">{project.title}</h3>
+          <p className="text-xs uppercase tracking-[0.24em] text-white/45">{project.eyebrow}</p>
+          <h3 className="mt-1 font-display text-lg sm:text-xl font-semibold">{project.title}</h3>
         </div>
-        <Layers3 className="shrink-0 text-electric" />
+        <Layers3 className="shrink-0 text-electric" size={20} />
       </div>
-      <p className="text-base leading-7 text-white/68">{project.description}</p>
-      <div className="mt-6 border border-white/10 bg-white/[0.035] p-4">
-        <div className="mb-3 flex items-center gap-2 text-sm font-bold uppercase tracking-[0.2em] text-electric">
-          <Target size={16} />
+      <p className="text-sm leading-6 text-white/70">{project.description}</p>
+      <div className="mt-4 border border-white/10 bg-white/[0.035] p-3.5">
+        <div className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-electric">
+          <Target size={14} />
           Overview
         </div>
-        <p className="text-sm leading-7 text-white/66">{project.overview}</p>
+        <p className="text-xs sm:text-sm leading-5 sm:leading-6 text-white/65">{project.overview}</p>
       </div>
       <div className="mt-6">
         <p className="mb-3 text-xs uppercase tracking-[0.28em] text-white/42">Key Achievements</p>

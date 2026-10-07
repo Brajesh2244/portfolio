@@ -11,9 +11,9 @@ function StatCard({ label, value, caption, delay = 0 }) {
       whileHover={{ y: -8, rotateX: 4, rotateY: -4 }}
     >
       <div className="absolute left-0 top-0 h-px w-full bg-holo-line opacity-60" />
-      <p className="font-display text-5xl font-bold text-white">{value}</p>
-      <h3 className="mt-3 text-sm uppercase tracking-[0.28em] text-electric">{label}</h3>
-      <p className="mt-4 text-sm leading-6 text-white/58">{caption}</p>
+      <p className="font-display text-3xl sm:text-4xl font-bold text-white">{value}</p>
+      <h3 className="mt-2 text-xs sm:text-sm uppercase tracking-[0.22em] text-electric">{label}</h3>
+      <p className="mt-2.5 text-xs sm:text-sm leading-5 sm:leading-6 text-white/60">{caption}</p>
     </motion.div>
   );
 }

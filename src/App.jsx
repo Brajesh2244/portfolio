@@ -121,9 +121,10 @@ function App() {
 
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 0.4,
       smoothWheel: true,
-      wheelMultiplier: 0.78
+      wheelMultiplier: 1.35,
+      touchMultiplier: 1.6
     });
 
     const tick = (time) => {
@@ -259,50 +260,50 @@ function Hero() {
             transition={{ duration: 0.9, ease: "easeOut" }}
             className="max-w-4xl"
           >
-            <div className="eyebrow mb-5">
-              <Bot size={16} />
+            <div className="eyebrow mb-4">
+              <Bot size={15} />
               Java Full Stack Developer & Software Engineer
             </div>
             <h1 className="hero-title">BRAJESH KUMAR</h1>
-            <div className="mt-5 max-w-3xl">
-              <p className="text-sm font-bold uppercase tracking-[0.24em] text-white/48">MCA Graduate building toward</p>
+            <div className="mt-3.5 max-w-2xl">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">MCA Graduate building toward</p>
               <RoleSwitcher />
             </div>
-            <p className="mt-7 max-w-2xl text-base leading-8 text-white/68 sm:text-lg">
+            <p className="mt-4 max-w-2xl text-sm sm:text-base leading-6 sm:leading-7 text-white/70">
               Detail-oriented Java Full Stack Developer with hands-on experience building responsive web applications
               using Java, Spring Boot, React, and SQL. Skilled in REST API integration, JDBC connectivity, and end-to-end
               feature delivery.
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-5 flex flex-wrap gap-2.5">
               {["Java Developer", "Full Stack Developer", "Spring Boot & React", "Software Engineer"].map((goal) => (
                 <span key={goal} className="mission-chip">
                   {goal}
                 </span>
               ))}
             </div>
-            <div className="mt-9 flex flex-wrap gap-4">
-              <a href="#projects" className="primary-button">
-                <Rocket size={18} />
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a href="#projects" className="primary-button compact">
+                <Rocket size={17} />
                 View Projects
               </a>
-              <button type="button" className="secondary-button" onClick={downloadResume}>
-                <Download size={18} />
+              <button type="button" className="secondary-button compact" onClick={downloadResume}>
+                <Download size={17} />
                 Download Resume
               </button>
-              <a href="#contact" className="secondary-button">
-                <Send size={18} />
+              <a href="#contact" className="secondary-button compact">
+                <Send size={17} />
                 Contact Me
               </a>
             </div>
-            <div className="mt-9 flex items-center gap-3">
+            <div className="mt-6 flex items-center gap-3">
               <a className="icon-button" href="https://github.com/" aria-label="GitHub">
-                <Github size={19} />
+                <Github size={18} />
               </a>
               <a className="icon-button" href="https://www.linkedin.com/" aria-label="LinkedIn">
-                <Linkedin size={19} />
+                <Linkedin size={18} />
               </a>
               <a className="icon-button" href="mailto:brajesh552077@gmail.com" aria-label="Email">
-                <Mail size={19} />
+                <Mail size={18} />
               </a>
             </div>
           </motion.div>
@@ -313,17 +314,17 @@ function Hero() {
             transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
             className="glass-panel parallax-float hidden lg:block"
           >
-            <div className="mb-6 flex items-center justify-between border-b border-white/10 pb-4">
+            <div className="mb-5 flex items-center justify-between border-b border-white/10 pb-3.5">
               <div>
-                <p className="text-xs uppercase tracking-[0.32em] text-electric">Candidate Signal</p>
-                <h2 className="mt-2 font-display text-2xl font-semibold">Recruiter Ready</h2>
+                <p className="text-xs uppercase tracking-[0.24em] text-electric">Candidate Signal</p>
+                <h2 className="mt-1 font-display text-xl font-semibold">Recruiter Ready</h2>
               </div>
-              <span className="relative flex h-4 w-4">
+              <span className="relative flex h-3.5 w-3.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-70" />
-                <span className="relative inline-flex h-4 w-4 rounded-full bg-mint" />
+                <span className="relative inline-flex h-3.5 w-3.5 rounded-full bg-mint" />
               </span>
             </div>
-            <div className="space-y-4">
+            <div className="space-y-3.5">
               {[
                 ["Core Java + OOP", "94%"],
                 ["Spring Boot & APIs", "88%"],
@@ -331,11 +332,11 @@ function Hero() {
                 ["SQL & Relational DB", "86%"]
               ].map(([label, value]) => (
                 <div key={label}>
-                  <div className="mb-2 flex justify-between text-sm text-white/72">
+                  <div className="mb-1.5 flex justify-between text-xs text-white/72">
                     <span>{label}</span>
-                    <span className="text-electric">{value}</span>
+                    <span className="text-electric font-semibold">{value}</span>
                   </div>
-                  <div className="h-2 overflow-hidden bg-white/10">
+                  <div className="h-1.5 overflow-hidden bg-white/10">
                     <div className="h-full bg-gradient-to-r from-electric via-mint to-neon" style={{ width: value }} />
                   </div>
                 </div>
@@ -388,12 +389,12 @@ function About() {
       />
       <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
         <div className="glass-panel reveal">
-          <p className="text-xl leading-9 text-white/78">
+          <p className="text-sm sm:text-base leading-6 sm:leading-7 text-white/78">
             Detail-oriented Java Full Stack Developer and MCA graduate (9.4 CGPA, 2nd Rank Holder at Sir MVIT) with
             hands-on experience building full-stack web applications using Java, Spring Boot, React.js, and SQL.
             Skilled in REST API integration, JDBC connectivity, and end-to-end feature delivery across frontend and backend layers.
           </p>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
             <Capability icon={Code2} title="Java & Spring Boot" text="Core Java, OOP, Spring Boot, Hibernate, JDBC, and RESTful APIs." />
             <Capability icon={TerminalSquare} title="React & Frontend" text="Component-driven interfaces with responsive Tailwind CSS styling." />
             <Capability icon={Database} title="Database & SQL" text="Relational database design, JDBC connectivity, and query optimization." />
@@ -412,10 +413,10 @@ function About() {
 
 function Capability({ icon: Icon, title, text }) {
   return (
-    <div className="border border-white/10 bg-white/[0.035] p-5">
-      <Icon className="mb-4 text-electric" size={24} />
-      <h3 className="font-display text-lg font-semibold">{title}</h3>
-      <p className="mt-2 text-sm leading-6 text-white/62">{text}</p>
+    <div className="border border-white/10 bg-white/[0.035] p-3.5 sm:p-4">
+      <Icon className="mb-3 text-electric" size={20} />
+      <h3 className="font-display text-sm sm:text-base font-semibold">{title}</h3>
+      <p className="mt-1.5 text-xs sm:text-sm leading-5 sm:leading-6 text-white/60">{text}</p>
     </div>
   );
 }
