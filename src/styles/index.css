@@ -434,6 +434,21 @@ canvas {
   color: white;
 }
 
+.profile-portrait-frame {
+  box-shadow:
+    0 0 0 1px rgba(0, 212, 255, 0.25),
+    0 16px 40px rgba(0, 0, 0, 0.6),
+    0 0 35px rgba(0, 212, 255, 0.14);
+}
+
+.profile-portrait-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 62%, rgba(5, 5, 5, 0.8) 100%);
+}
+
 .project-card::after,
 .glass-panel::after {
   position: absolute;
@@ -521,11 +536,11 @@ canvas {
   }
 
   .hero-title {
-    font-size: clamp(3rem, 17vw, 5.8rem);
+    font-size: clamp(2rem, 8vw, 3.2rem);
   }
 
   .role-window {
-    min-height: 6.8rem;
+    min-height: 3.2rem;
     align-items: flex-start;
   }
 

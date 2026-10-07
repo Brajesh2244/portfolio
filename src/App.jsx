@@ -16,6 +16,7 @@ import {
   Github,
   Linkedin,
   Mail,
+  MapPin,
   Rocket,
   Send,
   ServerCog,
@@ -23,6 +24,7 @@ import {
   Sparkles,
   TerminalSquare
 } from "lucide-react";
+import profileImg from "./assets/brajesh-kumar.jpg";
 import LoadingScreen from "./components/LoadingScreen.jsx";
 import SectionHeader from "./components/SectionHeader.jsx";
 import StatCard from "./components/StatCard.jsx";
@@ -314,14 +316,35 @@ function Hero() {
             transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
             className="glass-panel parallax-float hidden lg:block"
           >
-            <div className="mb-5 flex items-center justify-between border-b border-white/10 pb-3.5">
+            <div className="mb-4 flex items-center gap-3.5 border-b border-white/10 pb-4">
+              <div className="relative shrink-0">
+                <img
+                  src={profileImg}
+                  alt="Brajesh Kumar"
+                  className="h-14 w-14 rounded-full object-cover object-top border-2 border-electric/60 shadow-glow"
+                  loading="eager"
+                />
+                <span className="absolute bottom-0 right-0 flex h-3.5 w-3.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-70" />
+                  <span className="relative inline-flex h-3.5 w-3.5 rounded-full border border-void bg-mint" />
+                </span>
+              </div>
+              <div className="min-w-0">
+                <h3 className="font-display text-base font-semibold leading-tight text-white">Brajesh Kumar</h3>
+                <p className="text-xs text-white/60">Java Full Stack Developer</p>
+                <span className="mt-1 inline-flex items-center gap-1 text-[11px] font-semibold text-mint">
+                  <MapPin size={11} /> Bengaluru, India • Open to Roles
+                </span>
+              </div>
+            </div>
+
+            <div className="mb-4 flex items-center justify-between">
               <div>
                 <p className="text-xs uppercase tracking-[0.24em] text-electric">Candidate Signal</p>
-                <h2 className="mt-1 font-display text-xl font-semibold">Recruiter Ready</h2>
+                <h2 className="mt-0.5 font-display text-lg font-semibold">Recruiter Ready</h2>
               </div>
-              <span className="relative flex h-3.5 w-3.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-70" />
-                <span className="relative inline-flex h-3.5 w-3.5 rounded-full bg-mint" />
+              <span className="rounded border border-mint/30 bg-mint/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-mint">
+                MCA CGPA 9.4
               </span>
             </div>
             <div className="space-y-3.5">
@@ -387,24 +410,97 @@ function About() {
         summary="Focused on robust object-oriented Java backends, responsive React user interfaces, and clean, scalable architecture."
         icon={Code2}
       />
-      <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-        <div className="glass-panel reveal">
-          <p className="text-sm sm:text-base leading-6 sm:leading-7 text-white/78">
-            Detail-oriented Java Full Stack Developer and MCA graduate (9.4 CGPA, 2nd Rank Holder at Sir MVIT) with
-            hands-on experience building full-stack web applications using Java, Spring Boot, React.js, and SQL.
-            Skilled in REST API integration, JDBC connectivity, and end-to-end feature delivery across frontend and backend layers.
-          </p>
-          <div className="mt-6 grid gap-3 sm:grid-cols-2">
-            <Capability icon={Code2} title="Java & Spring Boot" text="Core Java, OOP, Spring Boot, Hibernate, JDBC, and RESTful APIs." />
-            <Capability icon={TerminalSquare} title="React & Frontend" text="Component-driven interfaces with responsive Tailwind CSS styling." />
-            <Capability icon={Database} title="Database & SQL" text="Relational database design, JDBC connectivity, and query optimization." />
-            <Capability icon={ServerCog} title="Engineering Workflow" text="Git, GitHub, SDLC, agile team habits, and AI-assisted developer velocity." />
+      <div className="grid gap-6 lg:grid-cols-[330px_minmax(0,1fr)] items-start">
+        {/* Profile Identity Card */}
+        <div className="glass-panel reveal flex flex-col items-center text-center p-5 sm:p-6 relative overflow-hidden group">
+          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-electric via-mint to-neon" />
+          
+          <div className="profile-portrait-frame relative w-full aspect-[4/5] max-w-[270px] overflow-hidden rounded-xl border border-white/20 bg-void/60">
+            <img
+              src={profileImg}
+              alt="Brajesh Kumar — Java Full Stack Developer"
+              className="h-full w-full object-cover object-top filter contrast-[1.02] transition-transform duration-500 group-hover:scale-105"
+              loading="lazy"
+            />
+            <div className="pointer-events-none absolute inset-0 border border-electric/30 rounded-xl" />
+            <div className="pointer-events-none absolute top-2.5 left-2.5 text-[10px] font-mono text-electric/80 tracking-widest bg-void/80 px-2 py-0.5 rounded border border-electric/20 backdrop-blur-sm">
+              DEV // BRAJESH
+            </div>
+            <div className="absolute bottom-3 inset-x-3 flex items-center justify-center gap-2 rounded-lg border border-mint/40 bg-void/90 px-3 py-1.5 backdrop-blur-md">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-mint" />
+              </span>
+              <span className="text-[11px] font-semibold uppercase tracking-wider text-mint">
+                Available Immediately
+              </span>
+            </div>
+          </div>
+
+          <div className="mt-4 w-full">
+            <h3 className="font-display text-lg sm:text-xl font-bold tracking-tight text-white">
+              Brajesh Kumar
+            </h3>
+            <p className="mt-0.5 text-xs font-semibold uppercase tracking-[0.16em] text-electric">
+              Java Full Stack Developer
+            </p>
+            <p className="mt-1 text-xs text-white/65 flex items-center justify-center gap-1">
+              <MapPin size={13} className="text-mint shrink-0" /> Bengaluru, Karnataka, India
+            </p>
+
+            <div className="mt-3.5 flex flex-wrap justify-center gap-1.5">
+              {["MCA (CGPA 9.4)", "Tap Academy Intern", "Spring Boot", "React.js"].map((badge) => (
+                <span
+                  key={badge}
+                  className="rounded border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[11px] font-medium text-white/75"
+                >
+                  {badge}
+                </span>
+              ))}
+            </div>
+
+            <div className="mt-4 grid grid-cols-2 gap-2 border-t border-white/10 pt-3.5">
+              <a
+                href="#contact"
+                className="inline-flex items-center justify-center gap-1.5 rounded-md border border-electric/50 bg-electric/15 px-3 py-2 text-xs font-semibold text-white hover:bg-electric/25 transition-all"
+              >
+                <Send size={13} /> Contact
+              </a>
+              <button
+                type="button"
+                onClick={downloadResume}
+                className="inline-flex items-center justify-center gap-1.5 rounded-md border border-white/15 bg-white/[0.05] px-3 py-2 text-xs font-semibold text-white/80 hover:bg-white/10 transition-all"
+              >
+                <Download size={13} /> Resume
+              </button>
+            </div>
           </div>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {stats.map((stat, index) => (
-            <StatCard key={stat.label} {...stat} delay={index * 0.08} />
-          ))}
+
+        {/* Narrative & Capabilities + Stats Column */}
+        <div className="space-y-5">
+          <div className="glass-panel reveal">
+            <h3 className="font-display text-base sm:text-lg font-semibold text-white mb-2">
+              Engineering Background & Value Proposition
+            </h3>
+            <p className="text-sm sm:text-base leading-6 sm:leading-7 text-white/78">
+              Detail-oriented Java Full Stack Developer and MCA graduate (9.4 CGPA, 2nd Rank Holder at Sir MVIT) with
+              hands-on experience building full-stack web applications using Java, Spring Boot, React.js, and SQL.
+              Skilled in REST API integration, JDBC connectivity, and end-to-end feature delivery across frontend and backend layers.
+            </p>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              <Capability icon={Code2} title="Java & Spring Boot" text="Core Java, OOP, Spring Boot, Hibernate, JDBC, and RESTful APIs." />
+              <Capability icon={TerminalSquare} title="React & Frontend" text="Component-driven interfaces with responsive Tailwind CSS styling." />
+              <Capability icon={Database} title="Database & SQL" text="Relational database design, JDBC connectivity, and query optimization." />
+              <Capability icon={ServerCog} title="Engineering Workflow" text="Git, GitHub, SDLC, agile team habits, and AI-assisted developer velocity." />
+            </div>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {stats.map((stat, index) => (
+              <StatCard key={stat.label} {...stat} delay={index * 0.08} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
