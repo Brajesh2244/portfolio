@@ -12,6 +12,7 @@ import {
   Code2,
   Database,
   Download,
+  FileText,
   GraduationCap,
   Github,
   Linkedin,
@@ -96,17 +97,10 @@ TECHNICAL SKILLS
 - Tools: Git, GitHub, Cursor AI, ChatGPT, Claude AI, Gemini AI, Antigravity AI
 `;
 
-function downloadResume() {
-  const blob = new Blob([resumeText], { type: "text/plain;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const anchor = document.createElement("a");
-  anchor.href = url;
-  anchor.download = "Brajesh_Kumar_Resume.txt";
-  document.body.appendChild(anchor);
-  anchor.click();
-  anchor.remove();
-  URL.revokeObjectURL(url);
+function openResumePdf() {
+  window.open("/Brajesh_Kumar_Resume.pdf", "_blank", "noopener,noreferrer");
 }
+const downloadResume = openResumePdf;
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -288,10 +282,15 @@ function Hero() {
                 <Rocket size={17} />
                 View Projects
               </a>
-              <button type="button" className="secondary-button compact" onClick={downloadResume}>
-                <Download size={17} />
-                Download Resume
-              </button>
+              <a
+                href="/Brajesh_Kumar_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="secondary-button compact"
+              >
+                <FileText size={17} />
+                View Resume
+              </a>
               <a href="#contact" className="secondary-button compact">
                 <Send size={17} />
                 Contact Me
@@ -466,13 +465,14 @@ function About() {
               >
                 <Send size={13} /> Contact
               </a>
-              <button
-                type="button"
-                onClick={downloadResume}
+              <a
+                href="/Brajesh_Kumar_Resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-1.5 rounded-md border border-white/15 bg-white/[0.05] px-3 py-2 text-xs font-semibold text-white/80 hover:bg-white/10 transition-all"
               >
-                <Download size={13} /> Resume
-              </button>
+                <FileText size={13} /> View Resume
+              </a>
             </div>
           </div>
         </div>
