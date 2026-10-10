@@ -1,5 +1,5 @@
 export const stats = [
-  { label: "MCA CGPA", value: "9.4", caption: "2nd Rank Holder at Sir MVIT with stellar academic record" },
+  { label: "MCA CGPA", value: "8.8", caption: "2nd Rank Holder at Sir MVIT with strong academic record" },
   { label: "Hackathon", value: "2nd", caption: "Sir MVIT Hackathon winner among 200+ competitors" },
   { label: "Full Stack Projects", value: "2+", caption: "End-to-end Java, React, SQL & JDBC applications" },
   { label: "Internships", value: "2", caption: "Tap Academy (Active) & BrizTech Pvt Ltd experience" }
@@ -123,10 +123,10 @@ export const education = [
   {
     title: "Master of Computer Applications (MCA)",
     organization: "Sir M. Visvesvaraya Institute of Technology, VTU, Bangalore",
-    meta: "Nov 2023 – Nov 2025 | CGPA 9.4",
+    meta: "Nov 2023 – Nov 2025 | CGPA 8.8",
     summary: "Department 2nd Rank Holder with exceptional academic performance in software engineering and computer science.",
     points: [
-      "Secured 2nd Rank in the department with an outstanding CGPA of 9.4 / 10.0",
+      "Secured 2nd Rank in the department with an outstanding CGPA of 8.8 / 10.0",
       "Won 2nd Place at Sir MVIT Hackathon competing against 200+ participants with optimized Java algorithms",
       "Core coursework: Data Structures, OOP, Web Application Development, Database Systems"
     ]
@@ -145,7 +145,7 @@ export const education = [
 
 export const certifications = [
   "2nd Place Winner — Sir MVIT Hackathon (200+ Participants)",
-  "2nd Rank Holder — Sir MVIT MCA Program (CGPA 9.4 / 10.0)",
+  "2nd Rank Holder — Sir MVIT MCA Program (CGPA 8.8 / 10.0)",
   "Web Development Certification — Internshala (HTML & CSS)",
   "Campus Hero Webinar — Coding Ninjas (Spring, REST APIs & CS Core)"
 ];

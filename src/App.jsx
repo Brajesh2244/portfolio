@@ -52,7 +52,7 @@ Email: brajesh552077@gmail.com | Phone: +91-9117252022 | Bengaluru, India
 Profiles: LinkedIn | GitHub
 
 PROFESSIONAL SUMMARY
-Detail-oriented Java Full Stack Developer and MCA graduate (CGPA 9.4, 2nd Rank Holder at Sir MVIT) with hands-on experience building responsive, full-stack web applications using Java, JavaScript, React.js, and SQL. Skilled in REST API integration, JDBC-based database connectivity, and end-to-end feature development across frontend and backend layers.
+Detail-oriented Java Full Stack Developer and MCA graduate (CGPA 8.8, 2nd Rank Holder at Sir MVIT) with hands-on experience building responsive, full-stack web applications using Java, JavaScript, React.js, and SQL. Skilled in REST API integration, JDBC-based database connectivity, and end-to-end feature delivery across frontend and backend layers.
 
 PROFESSIONAL EXPERIENCE
 1. Java Developer Intern — Tap Academy (February 2026 – Present)
@@ -66,13 +66,13 @@ PROFESSIONAL EXPERIENCE
 - Collaborated in Agile sprints, daily stand-ups, and code reviews.
 
 ACADEMIC PROJECTS
-1. AI-Enhanced E-Commerce Platform | Full Stack Java
-- Technologies: Java, JDBC, SQL, React.js, HTML5, CSS3, Tailwind CSS, JavaScript, Git, GitHub
+1. FashionStore — AI-Enhanced E-Commerce Platform | Full Stack Java
+- Technologies: Java, JDBC, SQL, React.js, HTML5, CSS3, Tailwind CSS, JavaScript, Git, GitHub, Loom
 - Built full-stack e-commerce platform with authentication, product catalog, cart, and order processing.
 - Implemented JDBC connectivity and SQL queries to handle CRUD operations across core modules.
-- Structured code to separate UI and data-handling logic, improving maintainability.
+- Recorded live Loom walkthrough demonstrating complete user flows.
 
-2. AI-Assisted Food Delivery Application | Full Stack Java
+2. FoodieHub — AI-Assisted Food Delivery Application | Full Stack Java
 - Technologies: Java, JDBC, SQL, React.js, HTML5, CSS3, Tailwind CSS, JavaScript, Git, GitHub
 - Developed a food delivery app with restaurant listings, menu management, and order tracking.
 - Built responsive interfaces with React.js focused on clear navigation and usability.
@@ -80,12 +80,12 @@ ACADEMIC PROJECTS
 
 ACHIEVEMENTS & CERTIFICATIONS
 - 2nd Place Winner, Sir MVIT Hackathon (200+ participants)
-- 2nd Rank Holder, Sir MVIT MCA Program (CGPA: 9.4 / 10.0)
+- 2nd Rank Holder, Sir MVIT MCA Program (CGPA: 8.8 / 10.0)
 - Web Development Certification — Internshala
 - Campus Hero Webinar — Coding Ninjas
 
 EDUCATION
-- Master of Computer Applications (MCA) — Sir M. Visvesvaraya Institute of Technology, VTU, Bangalore | CGPA: 9.4 / 10.0
+- Master of Computer Applications (MCA) — Sir M. Visvesvaraya Institute of Technology, VTU, Bangalore | CGPA: 8.8 / 10.0
 - Bachelor of Computer Applications (BCA) — Jharkhand Rai University, Ranchi | CGPA: 7.9 / 10.0
 
 TECHNICAL SKILLS
@@ -344,7 +344,7 @@ function Hero() {
                 <h2 className="mt-0.5 font-display text-lg font-semibold">Recruiter Ready</h2>
               </div>
               <span className="rounded border border-mint/30 bg-mint/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-mint">
-                MCA CGPA 9.4
+                MCA CGPA 8.8
               </span>
             </div>
             <div className="space-y-3.5">
@@ -449,7 +449,7 @@ function About() {
             </p>
 
             <div className="mt-3.5 flex flex-wrap justify-center gap-1.5">
-              {["MCA (CGPA 9.4)", "Tap Academy Intern", "Spring Boot", "React.js"].map((badge) => (
+              {["MCA (CGPA 8.8)", "Tap Academy Intern", "Spring Boot", "React.js"].map((badge) => (
                 <span
                   key={badge}
                   className="rounded border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[11px] font-medium text-white/75"
@@ -484,7 +484,7 @@ function About() {
               Engineering Background & Value Proposition
             </h3>
             <p className="text-sm sm:text-base leading-6 sm:leading-7 text-white/78">
-              Detail-oriented Java Full Stack Developer and MCA graduate (9.4 CGPA, 2nd Rank Holder at Sir MVIT) with
+              Detail-oriented Java Full Stack Developer and MCA graduate (8.8 CGPA, 2nd Rank Holder at Sir MVIT) with
               hands-on experience building full-stack web applications using Java, Spring Boot, React.js, and SQL.
               Skilled in REST API integration, JDBC connectivity, and end-to-end feature delivery across frontend and backend layers.
             </p>
@@ -594,7 +594,7 @@ function Education() {
       <SectionHeader
         kicker="Education"
         title="Academic excellence & computing foundation"
-        summary="MCA degree with a 9.4 CGPA (2nd Rank Holder at Sir MVIT) and BCA degree establishing deep computer science and programming fundamentals."
+        summary="MCA degree with an 8.8 CGPA (2nd Rank Holder at Sir MVIT) and BCA degree establishing deep computer science and programming fundamentals."
         icon={GraduationCap}
       />
       <div className="timeline">

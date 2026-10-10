@@ -1,0 +1,69 @@
+BRAJESH KUMAR
+Email: brajesh552077@gmail.com | Phone: +91-9117252022 | Bengaluru, India
+LinkedIn: https://www.linkedin.com/ | GitHub: https://github.com/Brajesh2244
+
+================================================================================
+PROFESSIONAL SUMMARY
+================================================================================
+Detail-oriented Java Full Stack Developer and MCA graduate (CGPA 8.8, 2nd Rank Holder at Sir MVIT) with hands-on experience building responsive, full-stack web applications using Java, JavaScript, React.js, and SQL. Skilled in REST API integration, JDBC-based database connectivity, and end-to-end feature delivery across frontend and backend layers.
+
+================================================================================
+TECHNICAL SKILLS
+================================================================================
+- Programming Languages: Java (Core & Advanced), SQL, JavaScript
+- Backend Technologies: Spring Boot, Spring AI, Hibernate, JDBC, RESTful APIs, OOP, Collections, Multithreading, Exception Handling
+- Frontend Technologies: React.js, HTML5, CSS3, Tailwind CSS, Component-Driven UI
+- Databases: MySQL, Relational Database Design, Query Optimization
+- Tools & Environments: Git, GitHub, Vite, Postman, Cursor AI, ChatGPT, Claude AI, Gemini AI, Antigravity AI
+
+================================================================================
+PROFESSIONAL EXPERIENCE
+================================================================================
+1. Java Developer Intern — Tap Academy (Bengaluru, India)
+   Duration: February 2026 – Present
+   - Developed and maintained full-stack web applications and RESTful APIs using Core Java, Advanced Java, Spring Boot, Spring AI, JDBC, Hibernate, and MySQL.
+   - Built responsive and interactive frontend applications using React, JavaScript, HTML, and Tailwind CSS.
+   - Integrated frontend components with backend Java microservices and relational databases.
+   - Applied OOP, Collections, Multithreading, Exception Handling, and Java 8 features while optimizing SQL queries for performance.
+
+2. Software Engineering Intern — BrizTech Pvt. Ltd.
+   Duration: November 2024 – January 2025
+   - Designed, built, and tested REST APIs utilizing Java and the Spring Framework.
+   - Linked core Java backend services to responsive React/HTML/CSS front-end UI components.
+   - Troubleshot backend data routing issues to improve application stability.
+   - Collaborated in Agile sprints, daily stand-ups, code reviews, and Git version control.
+
+================================================================================
+FEATURED PROJECTS
+================================================================================
+1. FashionStore — AI-Enhanced E-Commerce Platform | Full Stack Java
+   - Technologies: Java, JDBC, SQL, React.js, HTML5, CSS3, Tailwind CSS, JavaScript, Git, GitHub, Loom
+   - Built a full-stack e-commerce platform with user authentication, product catalog filtering, shopping cart, and order processing.
+   - Implemented JDBC connectivity and optimized SQL queries to handle CRUD operations across core modules.
+   - Recorded live Loom walkthrough demonstrating complete user flows from registration to checkout.
+
+2. FoodieHub — AI-Assisted Food Delivery Application | Full Stack Java
+   - Technologies: Java, JDBC, SQL, React.js, HTML5, CSS3, Tailwind CSS, JavaScript, Git, GitHub
+   - Developed an interactive food delivery application featuring restaurant listings, menu browsing, cart checkout, and real-time order tracking.
+   - Built responsive interfaces with React.js focused on clear navigation and intuitive usability.
+   - Integrated JDBC and SQL for efficient restaurant, menu, and customer order data management.
+   - Recorded comprehensive live video demonstration showcasing end-to-end ordering workflows.
+
+================================================================================
+ACHIEVEMENTS & CERTIFICATIONS
+================================================================================
+- 2nd Rank Holder — Sir MVIT MCA Program (CGPA: 8.8 / 10.0)
+- 2nd Place Winner — Sir MVIT Hackathon (among 200+ competitors)
+- Web Development Certification — Internshala (HTML5, CSS3, Responsive Design)
+- Campus Hero Webinar — Coding Ninjas (Spring, REST APIs, & Core Computer Science)
+
+================================================================================
+EDUCATION
+================================================================================
+- Master of Computer Applications (MCA)
+  Sir M. Visvesvaraya Institute of Technology (VTU), Bangalore
+  Duration: Nov 2023 – Nov 2025 | CGPA: 8.8 / 10.0 (Department 2nd Rank Holder)
+
+- Bachelor of Computer Applications (BCA)
+  Jharkhand Rai University, Ranchi
+  Duration: Jun 2020 – Jul 2023 | CGPA: 7.9 / 10.0
