@@ -22,7 +22,38 @@ function ProjectCard({ project, delay = 0 }) {
       transition={{ delay, duration: 0.7 }}
       whileHover={{ y: -6 }}
     >
-      {project.videoUrl ? (
+      {project.embedUrl ? (
+        <div className="relative mb-6 overflow-hidden rounded-lg border border-electric/40 bg-black/90 shadow-2xl">
+          <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.04] px-3.5 py-2.5">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold text-electric">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-electric opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-electric" />
+              </span>
+              Loom Video Walkthrough
+            </span>
+            <span className="rounded border border-white/15 bg-white/[0.05] px-2 py-0.5 text-[11px] font-mono text-white/70">
+              FashionStore Demo
+            </span>
+          </div>
+
+          <div className="relative aspect-video w-full bg-black">
+            <iframe
+              src={project.embedUrl}
+              title={project.title}
+              webkitallowfullscreen="true"
+              mozallowfullscreen="true"
+              allowFullScreen
+              className="h-full w-full border-0 bg-black"
+            />
+          </div>
+
+          <div className="flex items-center justify-between border-t border-white/10 bg-black/60 px-3.5 py-2 text-xs">
+            <span className="text-white/60">Live Walkthrough & Architecture</span>
+            <span className="font-semibold text-electric">{project.outcome}</span>
+          </div>
+        </div>
+      ) : project.videoUrl ? (
         <div className="relative mb-6 overflow-hidden rounded-lg border border-neon/30 bg-black/90 shadow-2xl">
           <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.04] px-3.5 py-2.5">
             <span className="inline-flex items-center gap-2 text-xs font-semibold text-mint">
@@ -33,7 +64,7 @@ function ProjectCard({ project, delay = 0 }) {
               Demo Walkthrough Video
             </span>
             <span className="rounded border border-white/15 bg-white/[0.05] px-2 py-0.5 text-[11px] font-mono text-white/70">
-              MP4 1080p
+              FoodieHub MP4
             </span>
           </div>
 
@@ -122,7 +153,19 @@ function ProjectCard({ project, delay = 0 }) {
         ))}
       </div>
       <div className="mt-7 flex flex-wrap gap-3">
-        {project.videoUrl ? (
+        {project.embedUrl ? (
+          <>
+            <a
+              href={project.loomUrl || project.embedUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="primary-button compact"
+            >
+              <ExternalLink size={16} />
+              Watch on Loom
+            </a>
+          </>
+        ) : project.videoUrl ? (
           <>
             <button
               type="button"

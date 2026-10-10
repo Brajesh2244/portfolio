@@ -73,24 +73,26 @@ export const experiences = [
 
 export const projects = [
   {
-    title: "AI-Enhanced E-Commerce Platform",
+    title: "FashionStore — AI-Enhanced E-Commerce Platform",
     eyebrow: "Full Stack Java Platform",
+    loomUrl: "https://www.loom.com/share/183667ace2104f6d8d65132b083bbeda",
+    embedUrl: "https://www.loom.com/embed/183667ace2104f6d8d65132b083bbeda",
     description:
-      "Full-stack e-commerce platform featuring authentication, product catalog, cart workflows, and secure order processing.",
-    outcome: "Full Stack System",
-    outcomeLabel: "Architecture",
+      "Full-stack e-commerce luxury editorial platform featuring user authentication, product catalog filtering, cart workflows, and order processing.",
+    outcome: "Loom Walkthrough",
+    outcomeLabel: "Video Showcase",
     accent: "electric",
     overview:
       "Engineered an end-to-end web shopping experience with clean separation between UI components and backend database logic using Java, JDBC, SQL, and React.",
     achievements: [
       "Built full-stack e-commerce workflows: authentication, product catalog, cart, and checkout",
+      "Recorded live Loom demonstration walking through user authentication, product catalog, and cart flows",
       "Implemented JDBC connectivity and optimized SQL queries to handle CRUD operations across core modules",
-      "Structured clean architecture separating UI components and data-handling logic for high maintainability",
-      "Managed feature branches and commit history using Git/GitHub with AI-assisted developer workflows"
+      "Structured clean architecture separating UI components and data-handling logic for high maintainability"
     ],
     features: ["User Authentication", "Product Catalog & Cart", "Order Processing", "JDBC & SQL CRUD Operations"],
     technologies: ["Java", "JDBC", "SQL", "React.js", "Tailwind CSS", "JavaScript", "Git"],
-    liveUrl: "#contact",
+    liveUrl: "https://www.loom.com/share/183667ace2104f6d8d65132b083bbeda",
     githubUrl: "https://github.com/"
   },
   {
