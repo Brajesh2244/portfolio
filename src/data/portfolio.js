@@ -94,12 +94,13 @@ export const projects = [
     githubUrl: "https://github.com/"
   },
   {
-    title: "AI-Assisted Food Delivery Application",
+    title: "FoodieHub — AI-Assisted Food Delivery Application",
     eyebrow: "Full Stack Java Application",
+    videoUrl: "/videos/foodiehub-demo.mp4",
     description:
-      "Interactive food delivery application featuring restaurant listings, menu browsing, order placement, and status tracking.",
-    outcome: "Modular & Scalable",
-    outcomeLabel: "Architecture",
+      "Interactive food delivery platform featuring restaurant listings, menu browsing, order placement, and status tracking.",
+    outcome: "Live Demo Video",
+    outcomeLabel: "Showcase",
     accent: "neon",
     overview:
       "Developed a responsive food ordering system with React.js frontend navigation, backed by JDBC and SQL for restaurant, menu, and customer order management.",
@@ -107,7 +108,7 @@ export const projects = [
       "Developed a complete food delivery app with restaurant listings, menu management, and order tracking",
       "Built responsive interfaces with React.js focused on clear navigation and intuitive usability",
       "Integrated JDBC and SQL for efficient restaurant, menu, and customer order data management",
-      "Tested core flows early to ensure data integrity and catch functional issues ahead of release"
+      "Recorded comprehensive live video demonstration showcasing end-to-end ordering workflows"
     ],
     features: ["Restaurant Listings", "Menu Management", "Real-Time Order Tracking", "Relational Database Design"],
     technologies: ["Java", "JDBC", "SQL", "React.js", "Tailwind CSS", "JavaScript", "GitHub"],

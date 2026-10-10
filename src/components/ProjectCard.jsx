@@ -1,38 +1,83 @@
+import { useRef } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle2, ExternalLink, Github, Layers3, Orbit, Target } from "lucide-react";
+import { CheckCircle2, ExternalLink, Github, Layers3, Orbit, Play, Target } from "lucide-react";
 
 function ProjectCard({ project, delay = 0 }) {
+  const videoRef = useRef(null);
   const accentClass = project.accent === "neon" ? "text-neon border-neon/40 bg-neon/10" : "text-electric border-electric/40 bg-electric/10";
+
+  const handlePlayVideo = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+      videoRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
 
   return (
     <motion.article
       className="project-card reveal group"
       initial={{ opacity: 0, y: 34 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
+      viewport={{ once: true, amount: 0.2 }}
       transition={{ delay, duration: 0.7 }}
-      whileHover={{ rotateX: 4, rotateY: -5, y: -12 }}
+      whileHover={{ y: -6 }}
     >
-      <div className="relative mb-7 grid min-h-56 place-items-center overflow-hidden border border-white/10 bg-black/30">
-        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(0,212,255,0.12),transparent,rgba(124,58,237,0.16))]" />
-        <motion.div
-          className="absolute h-36 w-36 border border-electric/40"
-          animate={{ rotate: 360 }}
-          transition={{ repeat: Infinity, duration: 18, ease: "linear" }}
-        />
-        <motion.div
-          className="absolute h-24 w-24 border border-neon/45"
-          animate={{ rotate: -360 }}
-          transition={{ repeat: Infinity, duration: 12, ease: "linear" }}
-        />
-        <div className={`relative z-10 grid h-20 w-20 place-items-center border ${accentClass}`}>
-          <Orbit size={34} />
+      {project.videoUrl ? (
+        <div className="relative mb-6 overflow-hidden rounded-lg border border-neon/30 bg-black/90 shadow-2xl">
+          <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.04] px-3.5 py-2.5">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold text-mint">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-mint" />
+              </span>
+              Demo Walkthrough Video
+            </span>
+            <span className="rounded border border-white/15 bg-white/[0.05] px-2 py-0.5 text-[11px] font-mono text-white/70">
+              MP4 1080p
+            </span>
+          </div>
+
+          <div className="relative aspect-video w-full bg-black">
+            <video
+              ref={videoRef}
+              src={project.videoUrl}
+              controls
+              playsInline
+              preload="metadata"
+              className="h-full w-full object-contain bg-black"
+            >
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+          <div className="flex items-center justify-between border-t border-white/10 bg-black/60 px-3.5 py-2 text-xs">
+            <span className="text-white/60">Full-Stack Application Flow</span>
+            <span className="font-semibold text-neon">{project.outcome}</span>
+          </div>
         </div>
-        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between border border-white/10 bg-black/45 px-4 py-3 backdrop-blur-xl">
-          <span className="text-xs uppercase tracking-[0.22em] text-white/54">{project.outcomeLabel || "Architecture"}</span>
-          <strong className="font-display text-xl text-white">{project.outcome}</strong>
+      ) : (
+        <div className="relative mb-7 grid min-h-56 place-items-center overflow-hidden border border-white/10 bg-black/30">
+          <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(0,212,255,0.12),transparent,rgba(124,58,237,0.16))]" />
+          <motion.div
+            className="absolute h-36 w-36 border border-electric/40"
+            animate={{ rotate: 360 }}
+            transition={{ repeat: Infinity, duration: 18, ease: "linear" }}
+          />
+          <motion.div
+            className="absolute h-24 w-24 border border-neon/45"
+            animate={{ rotate: -360 }}
+            transition={{ repeat: Infinity, duration: 12, ease: "linear" }}
+          />
+          <div className={`relative z-10 grid h-20 w-20 place-items-center border ${accentClass}`}>
+            <Orbit size={34} />
+          </div>
+          <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between border border-white/10 bg-black/45 px-4 py-3 backdrop-blur-xl">
+            <span className="text-xs uppercase tracking-[0.22em] text-white/54">{project.outcomeLabel || "Architecture"}</span>
+            <strong className="font-display text-xl text-white">{project.outcome}</strong>
+          </div>
         </div>
-      </div>
+      )}
+
       <div className="mb-4 flex items-start justify-between gap-4">
         <div>
           <p className="text-xs uppercase tracking-[0.24em] text-white/45">{project.eyebrow}</p>
@@ -77,10 +122,32 @@ function ProjectCard({ project, delay = 0 }) {
         ))}
       </div>
       <div className="mt-7 flex flex-wrap gap-3">
-        <a href={project.liveUrl} className="primary-button compact">
-          <ExternalLink size={17} />
-          Live Demo
-        </a>
+        {project.videoUrl ? (
+          <>
+            <button
+              type="button"
+              onClick={handlePlayVideo}
+              className="primary-button compact"
+            >
+              <Play size={16} className="fill-current" />
+              Play Video Demo
+            </button>
+            <a
+              href={project.videoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="secondary-button compact"
+            >
+              <ExternalLink size={16} />
+              Open Video
+            </a>
+          </>
+        ) : (
+          <a href={project.liveUrl} className="primary-button compact">
+            <ExternalLink size={17} />
+            Live Demo
+          </a>
+        )}
         <a href={project.githubUrl} className="secondary-button compact">
           <Github size={17} />
           GitHub
