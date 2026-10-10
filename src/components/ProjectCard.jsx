@@ -1,17 +1,37 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, ExternalLink, Github, Layers3, Orbit, Play, Target } from "lucide-react";
 
 function ProjectCard({ project, delay = 0 }) {
   const videoRef = useRef(null);
+  const mediaRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoomActive, setIsLoomActive] = useState(false);
   const accentClass = project.accent === "neon" ? "text-neon border-neon/40 bg-neon/10" : "text-electric border-electric/40 bg-electric/10";
 
-  const handlePlayVideo = () => {
-    if (videoRef.current) {
-      videoRef.current.play();
-      videoRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+  const handleLiveDemo = () => {
+    if (project.videoUrl) {
+      if (videoRef.current) {
+        if (videoRef.current.paused) {
+          videoRef.current.play();
+          setIsPlaying(true);
+        } else {
+          videoRef.current.pause();
+          setIsPlaying(false);
+        }
+        videoRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    } else if (project.embedUrl) {
+      setIsLoomActive((prev) => !prev);
+      mediaRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    } else if (project.liveUrl) {
+      window.open(project.liveUrl, "_blank", "noopener,noreferrer");
     }
   };
+
+  const loomSrc = project.embedUrl
+    ? (isLoomActive ? `${project.embedUrl}?autoplay=1` : project.embedUrl)
+    : "";
 
   return (
     <motion.article
@@ -23,7 +43,7 @@ function ProjectCard({ project, delay = 0 }) {
       whileHover={{ y: -6 }}
     >
       {project.embedUrl ? (
-        <div className="relative mb-6 overflow-hidden rounded-lg border border-electric/40 bg-black/90 shadow-2xl">
+        <div ref={mediaRef} className="relative mb-6 overflow-hidden rounded-lg border border-electric/40 bg-black/90 shadow-2xl">
           <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.04] px-3.5 py-2.5">
             <span className="inline-flex items-center gap-2 text-xs font-semibold text-electric">
               <span className="relative flex h-2 w-2">
@@ -39,7 +59,7 @@ function ProjectCard({ project, delay = 0 }) {
 
           <div className="relative aspect-video w-full bg-black">
             <iframe
-              src={project.embedUrl}
+              src={loomSrc}
               title={project.title}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
               webkitallowfullscreen="true"
@@ -55,7 +75,7 @@ function ProjectCard({ project, delay = 0 }) {
           </div>
         </div>
       ) : project.videoUrl ? (
-        <div className="relative mb-6 overflow-hidden rounded-lg border border-neon/30 bg-black/90 shadow-2xl">
+        <div ref={mediaRef} className="relative mb-6 overflow-hidden rounded-lg border border-neon/30 bg-black/90 shadow-2xl">
           <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.04] px-3.5 py-2.5">
             <span className="inline-flex items-center gap-2 text-xs font-semibold text-mint">
               <span className="relative flex h-2 w-2">
@@ -75,6 +95,9 @@ function ProjectCard({ project, delay = 0 }) {
               controls
               playsInline
               preload="metadata"
+              onPlay={() => setIsPlaying(true)}
+              onPause={() => setIsPlaying(false)}
+              onEnded={() => setIsPlaying(false)}
               className="h-full w-full object-contain bg-black"
             >
               <source src={project.videoUrl} type="video/mp4" />
@@ -154,44 +177,38 @@ function ProjectCard({ project, delay = 0 }) {
         ))}
       </div>
       <div className="mt-7 flex flex-wrap gap-3">
-        {project.embedUrl ? (
-          <>
-            <a
-              href={project.loomUrl || project.embedUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="primary-button compact"
-            >
-              <ExternalLink size={16} />
-              Watch on Loom
-            </a>
-          </>
-        ) : project.videoUrl ? (
-          <>
-            <button
-              type="button"
-              onClick={handlePlayVideo}
-              className="primary-button compact"
-            >
+        <button
+          type="button"
+          onClick={handleLiveDemo}
+          className="primary-button compact"
+          aria-label={`Live Demo of ${project.title}`}
+        >
+          {isPlaying || isLoomActive ? (
+            <>
+              <span className="h-2 w-2 rounded-full bg-mint animate-pulse" />
+              Playing Demo
+            </>
+          ) : (
+            <>
               <Play size={16} className="fill-current" />
-              Play Video Demo
-            </button>
-            <a
-              href={project.videoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="secondary-button compact"
-            >
-              <ExternalLink size={16} />
-              Open Video
-            </a>
-          </>
-        ) : (
-          <a href={project.liveUrl} className="primary-button compact">
-            <ExternalLink size={17} />
-            Live Demo
+              Live Demo
+            </>
+          )}
+        </button>
+
+        {(project.loomUrl || project.videoUrl) && (
+          <a
+            href={project.loomUrl || project.videoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="secondary-button compact"
+            title="Open video in new tab"
+          >
+            <ExternalLink size={16} />
+            Open Video
           </a>
         )}
+
         <a href={project.githubUrl} className="secondary-button compact">
           <Github size={17} />
           GitHub
