@@ -41,6 +41,7 @@ function ProjectCard({ project, delay = 0 }) {
             <iframe
               src={project.embedUrl}
               title={project.title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
               webkitallowfullscreen="true"
               mozallowfullscreen="true"
               allowFullScreen
@@ -71,12 +72,12 @@ function ProjectCard({ project, delay = 0 }) {
           <div className="relative aspect-video w-full bg-black">
             <video
               ref={videoRef}
-              src={project.videoUrl}
               controls
               playsInline
               preload="metadata"
               className="h-full w-full object-contain bg-black"
             >
+              <source src={project.videoUrl} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </div>
